@@ -1,0 +1,60 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/margin_40"
+            android:paddingRight="@dimen/margin_40"
+            android:paddingTop="@dimen/margin_20">
+
+            <TextView
+                style="@style/text_style"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:gravity="center"
+                android:text="@string/my_nano_degree_apps" />
+
+            <Button
+                android:id="@+id/spotify_streamer_btn"
+                style="@style/button_style"
+                android:tag="@string/toast_launch_spotify"
+                android:text="@string/spotify_streamer" />
+
+            <Button
+                android:id="@+id/scores_app_btn"
+                style="@style/button_style"
+                android:tag="@string/toast_launch_score_app"
+                android:text="@string/scores_app" />
+
+            <Button
+                android:id="@+id/library_app_btn"
+                style="@style/button_style"
+                android:tag="@string/toast_launch_library_app"
+                android:text="@string/library_app" />
+
+            <Button
+                android:id="@+id/build_it_bigger_btn"
+                style="@style/button_style"
+                android:tag="@string/toast_launch_build_it_bigger"
+                android:text="@string/build_it_bigger" />
+
+            <Button
+                android:id="@+id/xyz_reader_btn"
+                style="@style/button_style"
+                android:tag="@string/toast_launch_xyz_reader_app"
+                android:text="@string/xyz_reader" />
+
+            <Button
+                android:id="@+id/capstone_btn"
+                style="@style/button_style"
+                android:background="@drawable/ripple_effect_red"
+                android:tag="@string/toast_launch_capstone_app"
+                android:text="@string/capstone"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </ScrollView>
+</merge>

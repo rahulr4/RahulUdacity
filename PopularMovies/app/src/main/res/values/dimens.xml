@@ -25,6 +25,7 @@
     <dimen name="text_size_45">45sp</dimen>
     <dimen name="text_size_50">50sp</dimen>
 
+    <dimen name="margin_pt5">0.5dp</dimen>
     <dimen name="margin_1">1dp</dimen>
     <dimen name="margin_2">2dp</dimen>
     <dimen name="margin_3">3dp</dimen>

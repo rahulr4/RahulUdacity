@@ -159,8 +159,7 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             try {
                 mAdapter.notifyDataSetChanged();
                 mAdapter = null;
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignored) {
             }
 
             if (isSortApplied) {

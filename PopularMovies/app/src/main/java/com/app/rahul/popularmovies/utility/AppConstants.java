@@ -6,7 +6,7 @@ package com.app.rahul.popularmovies.utility;
 public class AppConstants {
 
     public static final String BASE_URL = "http://api.themoviedb.org/3/";
-    public static final String BASE_THUMB_IMAGE_URL = "http://image.tmdb.org/t/p/w185";
+    public static final String BASE_THUMB_IMAGE_URL = "http://image.tmdb.org/t/p/w342";
 
     /**
      * Please replace this with your api key

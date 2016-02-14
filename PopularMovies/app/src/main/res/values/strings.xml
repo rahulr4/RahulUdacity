@@ -3,5 +3,6 @@
     <string name="most_popular">Most Popular</string>
     <string name="highest_rated">Highest Rated</string>
     <string name="message_context_cannot_null">Message cannot be null</string>
-
+    <string name="no_internet_connction">No internet connection.</string>
+    <string name="retry">RETRY</string>
 </resources>

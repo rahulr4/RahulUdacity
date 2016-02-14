@@ -2,6 +2,8 @@ package com.app.rahul.popularmovies.utility;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.ProgressBar;
 
 import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
@@ -24,5 +26,20 @@ public class Utility {
         if (nonBlockingProgressBar != null)
             nonBlockingProgressBar.setIndeterminateDrawable(new IndeterminateProgressDrawable(mContext));
         return nonBlockingProgressBar;
+    }
+
+    /**
+     * Static method to check network availability
+     *
+     * @param context Context of the calling class
+     */
+
+    public static boolean getNetworkState(Context context) {
+
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
     }
 }

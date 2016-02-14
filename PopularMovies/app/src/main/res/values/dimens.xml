@@ -4,7 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-
     <!-- text size dimensions -->
     <dimen name="drawer_shadow_length">24dp</dimen>
     <dimen name="text_size_10">10sp</dimen>

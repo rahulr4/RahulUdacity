@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
 
@@ -41,5 +42,34 @@ public class Utility {
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
+    }
+
+    /**
+     * Method to set text to a textview
+     *
+     * @param mTextView Textview in which to set text
+     * @param text      The text to set in the widget
+     */
+    public static void setText(TextView mTextView, String text) {
+        try {
+            if (text != null)
+                mTextView.setText(text.trim());
+        } catch (Exception ignored) {
+        }
+
+    }
+
+    /**
+     * Method to set text to a textview
+     *
+     * @param mTextView Textview in which to set text
+     * @param textResId The text id to set in the widget
+     */
+    public static void setText(TextView mTextView, int textResId) {
+        try {
+            mTextView.setText(textResId);
+        } catch (Exception ignored) {
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 package com.app.rahul.popularmovies.activity;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -64,7 +65,9 @@ public class MainActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent = new Intent(MainActivity.this, MoviesDetailActivity.class);
+                intent.putExtra(AppConstants.EXTRA_INTENT_PARCEL, moviesResultsList.get(position));
+                startActivity(intent);
             }
         });
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);

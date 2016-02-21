@@ -21,4 +21,5 @@ public class AppConstants {
     //Constants
     public static final String POPULARITY_DESC = "popularity.desc";
     public static final String HIGHEST_RATED = "vote_average.desc";
+    public static final String EXTRA_INTENT_PARCEL = "intent_parcelable_extra";
 }

@@ -13,6 +13,7 @@ import com.app.rahul.popularmovies.R;
  */
 public abstract class BaseActivity extends AppCompatActivity {
     protected Snackbar mSnackBar;
+    private Toolbar toolbar;
 
     @Override
     protected void onPause() {
@@ -21,14 +22,23 @@ public abstract class BaseActivity extends AppCompatActivity {
             mSnackBar.dismiss();
     }
 
+    protected void setToolBarColor(int resColor) {
+        if (toolbar != null)
+            toolbar.setBackgroundColor(resColor);
+    }
+
+    protected void setToolBarTextColor(int resColor) {
+        if (toolbar != null)
+            toolbar.setTitleTextColor(resColor);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutById());
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null)
             setSupportActionBar(toolbar);
-
         initUi();
 
     }

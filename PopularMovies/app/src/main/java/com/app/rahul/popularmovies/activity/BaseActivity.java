@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.app.rahul.popularmovies.R;
+import com.app.rahul.popularmovies.utility.MaterialProgressDialog;
+import com.app.rahul.popularmovies.utility.Utility;
 
 
 /**
@@ -14,6 +17,8 @@ import com.app.rahul.popularmovies.R;
 public abstract class BaseActivity extends AppCompatActivity {
     protected Snackbar mSnackBar;
     private Toolbar toolbar;
+    private MaterialProgressDialog mProgressDialog;
+    protected View mParent;
 
     @Override
     protected void onPause() {
@@ -37,10 +42,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutById());
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mParent = findViewById(R.id.parent);
+        mProgressDialog = Utility.getProgressDialogInstance(this);
         if (toolbar != null)
             setSupportActionBar(toolbar);
         initUi();
 
+    }
+
+    protected void showProgressDialog(boolean isShow) {
+        if (mProgressDialog != null) {
+            if (isShow)
+                mProgressDialog.show();
+            else
+                mProgressDialog.dismiss();
+        }
     }
 
     /**

@@ -7,6 +7,8 @@ import android.net.NetworkInfo;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.app.rahul.popularmovies.R;
+
 import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
 
 /**
@@ -27,6 +29,20 @@ public class Utility {
         if (nonBlockingProgressBar != null)
             nonBlockingProgressBar.setIndeterminateDrawable(new IndeterminateProgressDrawable(mContext));
         return nonBlockingProgressBar;
+    }
+
+    /**
+     * Static method to get an instance of material styled progress dialog
+     *
+     * @param mContext Context of the calling class
+     * @return An instance of MaterialProgressDialog
+     */
+    public static MaterialProgressDialog getProgressDialogInstance(Context mContext) {
+        MaterialProgressDialog mProgressDialog = new MaterialProgressDialog(mContext,
+                mContext.getString(R.string.please_wait));
+        mProgressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        mProgressDialog.setCancelable(false);
+        return mProgressDialog;
     }
 
     /**

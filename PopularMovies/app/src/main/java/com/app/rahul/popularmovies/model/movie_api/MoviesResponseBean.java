@@ -42,43 +42,46 @@ public class MoviesResponseBean {
     public static class MoviesResult implements Parcelable {
 
         @SerializedName("poster_path")
-        public String posterPath;
+        private String posterPath;
 
-        public boolean adult;
+        private boolean adult;
 
-        public String overview;
+        private String overview;
 
         @SerializedName("release_date")
-        public String releaseDate;
+        private String releaseDate;
 
         @SerializedName("genre_ids")
-        public ArrayList<Long> genreIds = new ArrayList<Long>();
+        private ArrayList<Long> genreIds = new ArrayList<>();
 
-        public long id;
+        private long id;
 
         @SerializedName("original_title")
-        public String originalTitle;
+        private String originalTitle;
 
         @SerializedName("original_language")
-        public String originalLanguage;
+        private String originalLanguage;
 
-        public String title;
+        private String title;
 
         @SerializedName("backdrop_path")
-        public String backdropPath;
+        private String backdropPath;
 
         @SerializedName("popularity")
-        public double popularity;
+        private double popularity;
 
         @SerializedName("vote_count")
-        public long voteCount;
+        private long voteCount;
 
-        public boolean video;
+        private boolean video;
 
         @SerializedName("vote_average")
-        public double voteAverage;
+        private double voteAverage;
 
-        protected MoviesResult(Parcel in) {
+        private double runtime;
+        private String tagline;
+
+        public MoviesResult(Parcel in) {
             posterPath = in.readString();
             adult = in.readByte() != 0;
             overview = in.readString();
@@ -106,9 +109,29 @@ public class MoviesResponseBean {
             }
         };
 
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel parcel, int i) {
+            parcel.writeString(posterPath);
+            parcel.writeByte((byte) (adult ? 1 : 0));
+            parcel.writeString(overview);
+            parcel.writeString(releaseDate);
+            parcel.writeLong(id);
+            parcel.writeString(originalTitle);
+            parcel.writeString(originalLanguage);
+            parcel.writeString(title);
+            parcel.writeString(backdropPath);
+            parcel.writeDouble(popularity);
+            parcel.writeLong(voteCount);
+            parcel.writeByte((byte) (video ? 1 : 0));
+            parcel.writeDouble(voteAverage);
+        }
+
         public String getPosterPath() {
-            if (TextUtils.isEmpty(posterPath))
-                return "";
             return posterPath;
         }
 
@@ -164,26 +187,14 @@ public class MoviesResponseBean {
             return voteAverage;
         }
 
-        @Override
-        public int describeContents() {
-            return 0;
+        public double getRuntime() {
+            return runtime;
         }
 
-        @Override
-        public void writeToParcel(Parcel parcel, int i) {
-            parcel.writeString(posterPath);
-            parcel.writeByte((byte) (adult ? 1 : 0));
-            parcel.writeString(overview);
-            parcel.writeString(releaseDate);
-            parcel.writeLong(id);
-            parcel.writeString(originalTitle);
-            parcel.writeString(originalLanguage);
-            parcel.writeString(title);
-            parcel.writeString(backdropPath);
-            parcel.writeDouble(popularity);
-            parcel.writeLong(voteCount);
-            parcel.writeByte((byte) (video ? 1 : 0));
-            parcel.writeDouble(voteAverage);
+        public String getTagline() {
+            if (TextUtils.isEmpty(tagline))
+                return "";
+            return tagline;
         }
     }
 }

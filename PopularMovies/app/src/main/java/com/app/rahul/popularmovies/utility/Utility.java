@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import com.app.rahul.popularmovies.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
 
 /**
@@ -43,6 +47,29 @@ public class Utility {
         mProgressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         mProgressDialog.setCancelable(false);
         return mProgressDialog;
+    }
+
+    /**
+     * Method to parse date from server
+     *
+     * @param date         Date from the server
+     * @param sourceFormat Format of the date from server
+     * @param targetFormat Target format in which to return the date
+     * @return Formatted date
+     */
+    public static String parseDateTime(String date, String sourceFormat, String targetFormat) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(sourceFormat);
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date strDate = sdf.parse(date);
+
+            SimpleDateFormat sdf2 = new SimpleDateFormat(targetFormat);
+            sdf2.setTimeZone(TimeZone.getDefault());
+            return sdf2.format(strDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return date;
+        }
     }
 
     /**

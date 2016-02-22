@@ -48,7 +48,8 @@ public class MoviesDetailActivity extends BaseActivity implements View.OnClickLi
         Utility.setText(movieName, moviesResult.getTitle());
 
         Utility.setText((TextView) findViewById(R.id.movie_desc), moviesResult.getOverview());
-        Utility.setText((TextView) findViewById(R.id.movie_release_year), moviesResult.getReleaseDate());
+        String formattedDate = Utility.parseDateTime(moviesResult.getReleaseDate(), AppConstants.DATE_FORMAT1, AppConstants.DATE_FORMAT2);
+        Utility.setText((TextView) findViewById(R.id.movie_release_year), formattedDate);
         Utility.setText((TextView) findViewById(R.id.movie_rating), moviesResult.getVoteAverage() + " /10");
         final SquareImageView movieImageView = (SquareImageView) findViewById(R.id.movie_image);
 

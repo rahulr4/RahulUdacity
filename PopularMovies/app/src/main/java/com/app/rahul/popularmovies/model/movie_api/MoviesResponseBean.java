@@ -132,6 +132,8 @@ public class MoviesResponseBean {
         }
 
         public String getPosterPath() {
+            if (TextUtils.isDigitsOnly(posterPath))
+                return "";
             return posterPath;
         }
 

@@ -14,5 +14,5 @@
     <string name="mark_favorite">MARK \nFAVORITE</string>
     <string name="mark_unfavorite">MARK \nUNFAVORITE</string>
     <string name="reviews">Reviews</string>
-    <string name="by">By:</string>
+    <string name="by">By: </string>
 </resources>

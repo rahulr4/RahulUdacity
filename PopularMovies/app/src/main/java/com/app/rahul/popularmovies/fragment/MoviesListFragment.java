@@ -44,7 +44,7 @@ public class MoviesListFragment extends BaseFragment implements SwipeRefreshLayo
                 mPagination = mPagination + 1;
                 getMoviesList(View.GONE);
             } else
-                mSnackBar = SnackBarBuilder.make(getView(), getString(R.string.no_internet_connction)).build();
+                mSnackBar = SnackBarBuilder.make(mGridView, getString(R.string.no_internet_connction)).build();
 
         }
     };
@@ -143,7 +143,8 @@ public class MoviesListFragment extends BaseFragment implements SwipeRefreshLayo
                 }
             });
         } else {
-            mSnackBar = SnackBarBuilder.make(getView(), getString(R.string.no_internet_connction))
+            showProgressBar(false);
+            mSnackBar = SnackBarBuilder.make(mGridView, getString(R.string.no_internet_connction))
                     .setActionText(getString(R.string.retry))
                     .onSnackBarClicked(new View.OnClickListener() {
                         @Override
@@ -175,7 +176,8 @@ public class MoviesListFragment extends BaseFragment implements SwipeRefreshLayo
             }
             getMoviesList(View.VISIBLE);
         } else {
-            mSnackBar = SnackBarBuilder.make(getView(), getString(R.string.no_internet_connction)).build();
+            showProgressBar(false);
+            mSnackBar = SnackBarBuilder.make(mGridView, getString(R.string.no_internet_connction)).build();
         }
     }
 

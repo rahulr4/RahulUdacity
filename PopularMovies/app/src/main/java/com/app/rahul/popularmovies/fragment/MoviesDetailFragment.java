@@ -182,6 +182,7 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
     }
 
     private void getMovieTrailers() {
+        findViewById(R.id.trailer_list_parent).setVisibility(View.GONE);
         if (ApplicationController.getApplicationInstance().isNetworkConnected() && isAdded()) {
             mTrailersProgressBar.setVisibility(View.VISIBLE);
             HashMap<String, String> stringHashMap = new HashMap<>();
@@ -195,6 +196,7 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
                     if (responseBean != null && responseBean.getResults() != null && !responseBean.getResults().isEmpty()) {
                         TrailersAdapter trailersAdapter = new TrailersAdapter(mContext, responseBean.getResults());
                         mTrailersRecyclerView.setAdapter(trailersAdapter);
+                        findViewById(R.id.trailer_list_parent).setVisibility(View.VISIBLE);
                     } else {
                         findViewById(R.id.trailer_list_parent).setVisibility(View.GONE);
                     }

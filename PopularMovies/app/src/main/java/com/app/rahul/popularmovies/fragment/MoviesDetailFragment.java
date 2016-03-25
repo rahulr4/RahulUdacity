@@ -59,8 +59,11 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
         moviesResult = getArguments().getParcelable(AppConstants.EXTRA_INTENT_PARCEL);
         final TextView movieName = (TextView) findViewById(R.id.movie_name);
         Utility.setText(movieName, moviesResult.getTitle());
-
-        Utility.setText((TextView) findViewById(R.id.movie_desc), moviesResult.getOverview());
+        TextView movieDescTv = (TextView) findViewById(R.id.movie_desc);
+        Utility.setText(movieDescTv, moviesResult.getOverview());
+        if (TextUtils.isEmpty(moviesResult.getOverview())) {
+            movieDescTv.setVisibility(View.GONE);
+        }
         String formattedDate = Utility.parseDateTime(moviesResult.getReleaseDate(), AppConstants.DATE_FORMAT1
                 , AppConstants.DATE_FORMAT2);
         Utility.setText((TextView) findViewById(R.id.movie_release_year), formattedDate);

@@ -71,6 +71,8 @@ public class ReviewsListingActivity extends BaseActivity implements SwipeRefresh
             progressBar.setVisibility(View.VISIBLE);
             HashMap<String, String> stringHashMap = new HashMap<>();
             stringHashMap.put(AppConstants.PARAM_API_KEY, AppConstants.API_KEY);
+            stringHashMap.put(AppConstants.PARAM_PAGE, mPagination + "");
+
             Call<ReviewsListingResponse> beanCall = AppRetrofit.getInstance().getApiServices().apiMovieReviews(/*movieId*/140420, stringHashMap);
             beanCall.enqueue(new Callback<ReviewsListingResponse>() {
                 @Override

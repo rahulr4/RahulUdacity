@@ -135,7 +135,24 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:indeterminate="true" />
-
         </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/reviews_listing_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/see_more_reviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="@dimen/margin_8"
+            android:text="See More Reviews"
+            android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>

@@ -6,6 +6,7 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -16,6 +17,7 @@ import com.app.rahul.popularmovies.R;
 import com.app.rahul.popularmovies.adapter.TrailersAdapter;
 import com.app.rahul.popularmovies.database.MoviesListingDao;
 import com.app.rahul.popularmovies.model.movie_api.MoviesResponseBean;
+import com.app.rahul.popularmovies.model.reviews_api.ReviewsListingResponse;
 import com.app.rahul.popularmovies.model.trailers_api.TrailersResponseBean;
 import com.app.rahul.popularmovies.network.AppRetrofit;
 import com.app.rahul.popularmovies.utility.AppConstants;
@@ -26,6 +28,7 @@ import com.app.rahul.popularmovies.utility.Utility;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
@@ -41,6 +44,8 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
     private MoviesResponseBean.MoviesResult moviesResult;
     private ProgressBar mTrailersProgressBar;
     private RecyclerView mTrailersRecyclerView;
+    private LinearLayout reviewsContainer;
+    private TextView seeMoreReviews;
 
     @Override
     public int getLayoutById() {
@@ -66,10 +71,11 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mTrailersRecyclerView.setLayoutManager(linearLayoutManager);
-
+        reviewsContainer = (LinearLayout) findViewById(R.id.reviews_listing_parent);
         TextView markFavoriteTv = (TextView) findViewById(R.id.mark_favorite);
         markFavoriteTv.setOnClickListener(this);
-
+        seeMoreReviews = (TextView) findViewById(R.id.see_more_reviews);
+        seeMoreReviews.setVisibility(View.GONE);
         if (!TextUtils.isEmpty(moviesResult.getPosterPath()))
             Picasso.with(mContext)
                     .load(AppConstants.BASE_THUMB_IMAGE_URL + moviesResult.getPosterPath())
@@ -117,6 +123,7 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
         }
         getMoviesDetail();
         getMovieTrailers();
+        getMovieReviews();
     }
 
     private void getMoviesDetail() {
@@ -188,6 +195,61 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
                         }
                     })
                     .build();
+        }
+    }
+
+    private void getMovieReviews() {
+        if (ApplicationController.getApplicationInstance().isNetworkConnected() && isAdded()) {
+            mTrailersProgressBar.setVisibility(View.VISIBLE);
+            HashMap<String, String> stringHashMap = new HashMap<>();
+            stringHashMap.put(AppConstants.PARAM_API_KEY, AppConstants.API_KEY);
+            Call<ReviewsListingResponse> beanCall = AppRetrofit.getInstance().getApiServices().apiMovieReviews(/*moviesResult.getId()*/140420, stringHashMap);
+            beanCall.enqueue(new Callback<ReviewsListingResponse>() {
+                @Override
+                public void onResponse(Response<ReviewsListingResponse> response1, Retrofit retrofit) {
+                    ReviewsListingResponse responseBean = response1.body();
+                    ArrayList<ReviewsListingResponse.ReviewsEntity> reviewsEntities = responseBean.getResults();
+                    reviewsEntities.addAll(reviewsEntities);
+                    reviewsEntities.addAll(reviewsEntities);
+                    reviewsEntities.addAll(reviewsEntities);
+
+                    addReviews(responseBean.getResults());
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                    mTrailersProgressBar.setVisibility(View.GONE);
+                    Lg.i("Retro", t.toString());
+                }
+            });
+        } else {
+            mSnackBar = SnackBarBuilder.make(mParent, getString(R.string.no_internet_connction))
+                    .setActionText(getString(R.string.retry))
+                    .onSnackBarClicked(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getMoviesDetail();
+                        }
+                    })
+                    .build();
+        }
+    }
+
+    private void addReviews(ArrayList<ReviewsListingResponse.ReviewsEntity> resultsEntityArrayList) {
+        ArrayList<ReviewsListingResponse.ReviewsEntity> results;
+        if (resultsEntityArrayList.size() > 3) {
+            seeMoreReviews.setVisibility(View.VISIBLE);
+            results = new ArrayList<>(resultsEntityArrayList.subList(0, 3));
+        } else {
+            results = resultsEntityArrayList;
+        }
+        for (int i = 0; i < results.size(); i++) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.layout_reviews_row, null);
+            TextView reviewContentTv = (TextView) view.findViewById(R.id.review_content_tv);
+            TextView reviewAuthorTv = (TextView) view.findViewById(R.id.review_author_tv);
+            reviewContentTv.setText(results.get(i).getContent());
+            reviewAuthorTv.setText(results.get(i).getAuthor());
+            reviewsContainer.addView(view);
         }
     }
 

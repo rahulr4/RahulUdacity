@@ -1,6 +1,7 @@
 package com.app.rahul.popularmovies.network;
 
 import com.app.rahul.popularmovies.model.movie_api.MoviesResponseBean;
+import com.app.rahul.popularmovies.model.reviews_api.ReviewsListingResponse;
 import com.app.rahul.popularmovies.model.trailers_api.TrailersResponseBean;
 
 import java.util.Map;
@@ -24,4 +25,7 @@ public interface ApiServices {
 
     @GET("movie/{movie_id}/videos?")
     Call<TrailersResponseBean> apiMovieTrailers(@Path("movie_id") long movieId, @QueryMap Map<String, String> stringMap);
+
+    @GET("movie/{movie_id}/reviews?")
+    Call<ReviewsListingResponse> apiMovieReviews(@Path("movie_id") long movieId, @QueryMap Map<String, String> stringMap);
 }

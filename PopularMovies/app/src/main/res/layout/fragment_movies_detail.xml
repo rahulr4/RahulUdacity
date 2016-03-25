@@ -100,9 +100,8 @@
                     android:paddingBottom="@dimen/margin_5"
                     android:paddingLeft="@dimen/margin_10"
                     android:paddingRight="@dimen/margin_10"
-
                     android:paddingTop="@dimen/margin_5"
-                    android:text="MARK AS\nFAVORITE"
+                    android:text="@string/mark_favorite"
                     android:textColor="@color/dim_grey_757575"
                     android:textSize="@dimen/text_size_16"
                     android:textStyle="normal" />

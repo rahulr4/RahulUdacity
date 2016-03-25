@@ -127,6 +127,17 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
         getMoviesDetail();
         getMovieTrailers();
         getMovieReviews();
+
+        setFavoriteText();
+    }
+
+    private void setFavoriteText() {
+        MoviesListingDao moviesListingDao = new MoviesListingDao(mContext);
+        if (moviesListingDao.isMovieFavourite(moviesResult)) {
+            Utility.setText((TextView) findViewById(R.id.mark_favorite), getString(R.string.mark_unfavorite));
+        } else {
+            Utility.setText((TextView) findViewById(R.id.mark_favorite), getString(R.string.mark_favorite));
+        }
     }
 
     private void getMoviesDetail() {
@@ -215,9 +226,6 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
                         ArrayList<ReviewsListingResponse.ReviewsEntity> reviewsEntities = responseBean.getResults();
                         if (reviewsEntities != null) {
                             reviewsEntities.addAll(reviewsEntities);
-                            reviewsEntities.addAll(reviewsEntities);
-                            reviewsEntities.addAll(reviewsEntities);
-
                             addReviews(responseBean.getResults());
                         }
                     }
@@ -273,6 +281,7 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
                     mSnackBar = SnackBarBuilder.make(mParent, moviesResult.getTitle() +
                             mContext.getString(R.string.removed_from_favourites)).build();
                 }
+                setFavoriteText();
                 break;
             case R.id.see_more_reviews:
                 Intent intent = new Intent(mContext, ReviewsListingActivity.class);

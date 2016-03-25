@@ -11,4 +11,6 @@
     <string name="no_video_app_found">No app found to play video.</string>
     <string name="add_to_fav">" added to favourites"</string>
     <string name="removed_from_favourites">" removed from favourites"</string>
+    <string name="mark_favorite">MARK \nFAVORITE</string>
+    <string name="mark_unfavorite">MARK \nUNFAVORITE</string>
 </resources>

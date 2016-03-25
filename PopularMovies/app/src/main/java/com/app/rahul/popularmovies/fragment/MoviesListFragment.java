@@ -79,7 +79,9 @@ public class MoviesListFragment extends BaseFragment implements SwipeRefreshLayo
     }
 
     private void getMoviesList(int progressBarVisibility) {
-        if (ApplicationController.getApplicationInstance().isNetworkConnected()) {
+        if (mSortByParam.equals(AppConstants.MY_FAVORITES)) {
+            //TODO Get Favorites List from Database
+        } else if (ApplicationController.getApplicationInstance().isNetworkConnected()) {
             showProgressBar(true);
 
             HashMap<String, String> stringHashMap = new HashMap<>();

@@ -2,9 +2,11 @@
     <string name="app_name">Popular Movies</string>
     <string name="most_popular">Most Popular</string>
     <string name="highest_rated">Highest Rated</string>
+    <string name="my_favorites">Favorites</string>
     <string name="message_context_cannot_null">Message cannot be null</string>
     <string name="no_internet_connction">No internet connection.</string>
     <string name="retry">RETRY</string>
     <string name="please_wait">Please wait …</string>
     <string name="feature_in_stage_two">Feature in Stage 2</string>
+    <string name="no_video_app_found">No app found to play video.</string>
 </resources>

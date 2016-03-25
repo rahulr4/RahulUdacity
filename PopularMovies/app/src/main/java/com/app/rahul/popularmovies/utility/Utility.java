@@ -115,4 +115,8 @@ public class Utility {
         }
 
     }
+
+    public static String getYoutubeThumbUrl(String key) {
+        return "http://img.youtube.com/vi/" + key + "/hqdefault.jpg";
+    }
 }

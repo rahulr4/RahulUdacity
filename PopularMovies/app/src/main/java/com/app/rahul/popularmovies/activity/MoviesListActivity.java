@@ -47,6 +47,9 @@ public class MoviesListActivity extends BaseActivity {
             case R.id.highest_rated:
                 EventBus.getDefault().post(new MoviesListFilterEvent(AppConstants.HIGHEST_RATED));
                 return true;
+            case R.id.my_favorites:
+                EventBus.getDefault().post(new MoviesListFilterEvent(AppConstants.MY_FAVORITES));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

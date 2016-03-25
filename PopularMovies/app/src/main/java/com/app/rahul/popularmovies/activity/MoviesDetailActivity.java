@@ -3,14 +3,19 @@ package com.app.rahul.popularmovies.activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.app.rahul.popularmovies.ApplicationController;
 import com.app.rahul.popularmovies.R;
+import com.app.rahul.popularmovies.adapter.TrailersAdapter;
 import com.app.rahul.popularmovies.model.movie_api.MoviesResponseBean;
+import com.app.rahul.popularmovies.model.trailers_api.TrailersResponseBean;
 import com.app.rahul.popularmovies.network.AppRetrofit;
 import com.app.rahul.popularmovies.utility.AppConstants;
 import com.app.rahul.popularmovies.utility.Lg;
@@ -32,6 +37,8 @@ import retrofit.Retrofit;
  */
 public class MoviesDetailActivity extends BaseActivity implements View.OnClickListener {
     private MoviesResponseBean.MoviesResult moviesResult;
+    private ProgressBar mTrailersProgressBar;
+    private RecyclerView mTrailersRecyclerView;
 
     @Override
     public int getLayoutById() {
@@ -52,6 +59,11 @@ public class MoviesDetailActivity extends BaseActivity implements View.OnClickLi
         Utility.setText((TextView) findViewById(R.id.movie_release_year), formattedDate);
         Utility.setText((TextView) findViewById(R.id.movie_rating), moviesResult.getVoteAverage() + " /10");
         final SquareImageView movieImageView = (SquareImageView) findViewById(R.id.movie_image);
+        mTrailersProgressBar = Utility.getProgressBarInstance(this, R.id.trailer_progress_bar);
+        mTrailersRecyclerView = (RecyclerView) findViewById(R.id.movie_detail_trailers_list);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mTrailersRecyclerView.setLayoutManager(linearLayoutManager);
 
         TextView markFavoriteTv = (TextView) findViewById(R.id.mark_favorite);
         markFavoriteTv.setOnClickListener(this);
@@ -99,6 +111,7 @@ public class MoviesDetailActivity extends BaseActivity implements View.OnClickLi
                         }
                     });
         getMoviesDetail();
+        getMovieTrailers();
     }
 
     @Override
@@ -133,6 +146,40 @@ public class MoviesDetailActivity extends BaseActivity implements View.OnClickLi
                 @Override
                 public void onFailure(Throwable t) {
                     showProgressDialog(false);
+                    Lg.i("Retro", t.toString());
+                }
+            });
+        } else {
+            mSnackBar = SnackBarBuilder.make(getWindow().getDecorView(), getString(R.string.no_internet_connction))
+                    .setActionText(getString(R.string.retry))
+                    .onSnackBarClicked(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getMoviesDetail();
+                        }
+                    })
+                    .build();
+        }
+    }
+
+    private void getMovieTrailers() {
+        if (ApplicationController.getApplicationInstance().isNetworkConnected()) {
+            mTrailersProgressBar.setVisibility(View.VISIBLE);
+            HashMap<String, String> stringHashMap = new HashMap<>();
+            stringHashMap.put(AppConstants.PARAM_API_KEY, AppConstants.API_KEY);
+            Call<TrailersResponseBean> beanCall = AppRetrofit.getInstance().getApiServices().apiMovieTrailers(moviesResult.getId(), stringHashMap);
+            beanCall.enqueue(new Callback<TrailersResponseBean>() {
+                @Override
+                public void onResponse(Response<TrailersResponseBean> response1, Retrofit retrofit) {
+                    mTrailersProgressBar.setVisibility(View.GONE);
+                    TrailersResponseBean responseBean = response1.body();
+                    TrailersAdapter trailersAdapter = new TrailersAdapter(MoviesDetailActivity.this, responseBean.getResults());
+                    mTrailersRecyclerView.setAdapter(trailersAdapter);
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                    mTrailersProgressBar.setVisibility(View.GONE);
                     Lg.i("Retro", t.toString());
                 }
             });

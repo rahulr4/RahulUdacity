@@ -44,58 +44,22 @@ public class MoviesResponseBean {
         @SerializedName("poster_path")
         private String posterPath;
 
-        private boolean adult;
-
         private String overview;
 
         @SerializedName("release_date")
         private String releaseDate;
 
-        @SerializedName("genre_ids")
-        private ArrayList<Long> genreIds = new ArrayList<>();
-
         private long id;
-
-        @SerializedName("original_title")
-        private String originalTitle;
-
-        @SerializedName("original_language")
-        private String originalLanguage;
-
+        private String isFavorite;
         private String title;
-
-        @SerializedName("backdrop_path")
-        private String backdropPath;
-
-        @SerializedName("popularity")
-        private double popularity;
-
-        @SerializedName("vote_count")
-        private long voteCount;
-
-        private boolean video;
 
         @SerializedName("vote_average")
         private double voteAverage;
 
         private double runtime;
-        private String tagline;
 
-        public MoviesResult(Parcel in) {
-            posterPath = in.readString();
-            adult = in.readByte() != 0;
-            overview = in.readString();
-            releaseDate = in.readString();
-            id = in.readLong();
-            originalTitle = in.readString();
-            originalLanguage = in.readString();
-            title = in.readString();
-            backdropPath = in.readString();
-            popularity = in.readDouble();
-            voteCount = in.readLong();
-            video = in.readByte() != 0;
-            voteAverage = in.readDouble();
-        }
+        @SerializedName("tagline")
+        private String tagLine;
 
         public static final Creator<MoviesResult> CREATOR = new Creator<MoviesResult>() {
             @Override
@@ -109,36 +73,14 @@ public class MoviesResponseBean {
             }
         };
 
-        @Override
-        public int describeContents() {
-            return 0;
-        }
+        public MoviesResult() {
 
-        @Override
-        public void writeToParcel(Parcel parcel, int i) {
-            parcel.writeString(posterPath);
-            parcel.writeByte((byte) (adult ? 1 : 0));
-            parcel.writeString(overview);
-            parcel.writeString(releaseDate);
-            parcel.writeLong(id);
-            parcel.writeString(originalTitle);
-            parcel.writeString(originalLanguage);
-            parcel.writeString(title);
-            parcel.writeString(backdropPath);
-            parcel.writeDouble(popularity);
-            parcel.writeLong(voteCount);
-            parcel.writeByte((byte) (video ? 1 : 0));
-            parcel.writeDouble(voteAverage);
         }
 
         public String getPosterPath() {
             if (TextUtils.isDigitsOnly(posterPath))
                 return "";
             return posterPath;
-        }
-
-        public boolean isAdult() {
-            return adult;
         }
 
         public String getOverview() {
@@ -149,54 +91,91 @@ public class MoviesResponseBean {
             return releaseDate;
         }
 
-        public ArrayList<Long> getGenreIds() {
-            return genreIds;
-        }
-
         public long getId() {
             return id;
-        }
-
-        public String getOriginalTitle() {
-            return originalTitle;
-        }
-
-        public String getOriginalLanguage() {
-            return originalLanguage;
         }
 
         public String getTitle() {
             return title;
         }
 
-        public String getBackdropPath() {
-            return backdropPath;
-        }
-
-        public double getPopularity() {
-            return popularity;
-        }
-
-        public long getVoteCount() {
-            return voteCount;
-        }
-
-        public boolean isVideo() {
-            return video;
-        }
-
         public double getVoteAverage() {
             return voteAverage;
+        }
+
+        public String getIsFavorite() {
+            if (TextUtils.isEmpty(isFavorite))
+                return "0";
+            return isFavorite;
+        }
+
+        public void setIsFavorite(String isFavorite) {
+            this.isFavorite = isFavorite;
+        }
+
+        public void setPosterPath(String posterPath) {
+            this.posterPath = posterPath;
+        }
+
+        public void setOverview(String overview) {
+            this.overview = overview;
+        }
+
+        public void setReleaseDate(String releaseDate) {
+            this.releaseDate = releaseDate;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public void setVoteAverage(double voteAverage) {
+            this.voteAverage = voteAverage;
+        }
+
+        public String getTagLine() {
+            if (TextUtils.isEmpty(tagLine))
+                return "";
+            return tagLine;
         }
 
         public double getRuntime() {
             return runtime;
         }
 
-        public String getTagline() {
-            if (TextUtils.isEmpty(tagline))
-                return "";
-            return tagline;
+        @Override
+        public int describeContents() {
+            return 0;
         }
+
+        @Override
+        public void writeToParcel(Parcel parcel, int i) {
+            parcel.writeString(posterPath);
+            parcel.writeString(overview);
+            parcel.writeString(releaseDate);
+            parcel.writeLong(id);
+            parcel.writeString(title);
+            parcel.writeDouble(voteAverage);
+            parcel.writeDouble(runtime);
+            parcel.writeString(tagLine);
+            parcel.writeString(isFavorite);
+        }
+
+        public MoviesResult(Parcel in) {
+            posterPath = in.readString();
+            overview = in.readString();
+            releaseDate = in.readString();
+            id = in.readLong();
+            title = in.readString();
+            voteAverage = in.readDouble();
+            runtime = in.readDouble();
+            tagLine = in.readString();
+            isFavorite = in.readString();
+        }
+
     }
 }

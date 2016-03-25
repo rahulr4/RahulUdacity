@@ -2,9 +2,13 @@ package com.app.rahul.popularmovies.activity;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.app.rahul.popularmovies.ApplicationController;
 import com.app.rahul.popularmovies.R;
+import com.app.rahul.popularmovies.database.MoviesHelper;
 import com.app.rahul.popularmovies.model.events.MoviesListFilterEvent;
 import com.app.rahul.popularmovies.utility.AppConstants;
+
 import de.greenrobot.event.EventBus;
 
 public class MoviesListActivity extends BaseActivity {
@@ -22,7 +26,7 @@ public class MoviesListActivity extends BaseActivity {
 
     @Override
     public void initUi() {
-
+        MoviesHelper.getDatabaseHelperInstance(ApplicationController.getApplicationInstance());
         if (findViewById(R.id.item_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).

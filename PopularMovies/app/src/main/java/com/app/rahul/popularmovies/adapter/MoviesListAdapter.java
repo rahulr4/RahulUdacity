@@ -1,6 +1,7 @@
 package com.app.rahul.popularmovies.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,12 +59,15 @@ public class MoviesListAdapter extends BaseAdapter {
         }
 
         MoviesResponseBean.MoviesResult moviesResult = getItem(i);
-        if (!moviesResult.getPosterPath().isEmpty())
+        if (!TextUtils.isEmpty(moviesResult.getPosterPath()))
             Picasso.with(mContext)
                     .load(AppConstants.BASE_THUMB_IMAGE_URL + moviesResult.getPosterPath())
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder)
                     .into(holder.moviesThumbnail);
+        else {
+            holder.moviesThumbnail.setImageResource(R.drawable.placeholder);
+        }
         return convertView;
     }
 

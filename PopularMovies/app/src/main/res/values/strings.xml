@@ -9,4 +9,6 @@
     <string name="please_wait">Please wait …</string>
     <string name="feature_in_stage_two">Feature in Stage 2</string>
     <string name="no_video_app_found">No app found to play video.</string>
+    <string name="add_to_fav">" added to favourites"</string>
+    <string name="removed_from_favourites">" removed from favourites"</string>
 </resources>

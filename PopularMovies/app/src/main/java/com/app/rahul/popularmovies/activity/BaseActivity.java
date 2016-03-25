@@ -27,12 +27,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             mSnackBar.dismiss();
     }
 
-    protected void setToolBarColor(int resColor) {
+    public void setToolBarColor(int resColor) {
         if (toolbar != null)
             toolbar.setBackgroundColor(resColor);
     }
 
-    protected void setToolBarTextColor(int resColor) {
+    public void setToolBarTextColor(int resColor) {
         if (toolbar != null)
             toolbar.setTitleTextColor(resColor);
     }

@@ -1,6 +1,7 @@
 package com.app.rahul.popularmovies.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,7 +10,9 @@ import android.widget.GridView;
 import com.app.rahul.popularmovies.ApplicationController;
 import com.app.rahul.popularmovies.R;
 import com.app.rahul.popularmovies.activity.MoviesDetailActivity;
+import com.app.rahul.popularmovies.activity.MoviesListActivity;
 import com.app.rahul.popularmovies.adapter.MoviesListAdapter;
+import com.app.rahul.popularmovies.database.MoviesListingDao;
 import com.app.rahul.popularmovies.model.events.MoviesListFilterEvent;
 import com.app.rahul.popularmovies.model.movie_api.MoviesResponseBean;
 import com.app.rahul.popularmovies.network.AppRetrofit;
@@ -68,9 +71,21 @@ public class MoviesListFragment extends BaseFragment implements SwipeRefreshLayo
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(mContext, MoviesDetailActivity.class);
-                intent.putExtra(AppConstants.EXTRA_INTENT_PARCEL, moviesResultsList.get(position));
-                startActivity(intent);
+                MoviesListActivity moviesListActivity = (MoviesListActivity) getActivity();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(AppConstants.EXTRA_INTENT_PARCEL, moviesResultsList.get(position));
+
+                if (moviesListActivity.mTwoPane) {
+                    MoviesDetailFragment moviesDetailFragment = new MoviesDetailFragment();
+                    moviesDetailFragment.setArguments(bundle);
+                    moviesListActivity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.item_detail_container, moviesDetailFragment).commit();
+
+                } else {
+                    Intent intent = new Intent(mContext, MoviesDetailActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
             }
         });
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
@@ -80,7 +95,12 @@ public class MoviesListFragment extends BaseFragment implements SwipeRefreshLayo
 
     private void getMoviesList(int progressBarVisibility) {
         if (mSortByParam.equals(AppConstants.MY_FAVORITES)) {
-            //TODO Get Favorites List from Database
+            MoviesListingDao moviesListingDao = new MoviesListingDao(mContext);
+            mGridView.setOnScrollListener(null);
+            moviesResultsList.addAll(moviesListingDao.getFavouriteMovieList());
+            mAdapter = new MoviesListAdapter(mContext, moviesResultsList);
+            mGridView.setAdapter(mAdapter);
+            showProgressBar(false);
         } else if (ApplicationController.getApplicationInstance().isNetworkConnected()) {
             showProgressBar(true);
 

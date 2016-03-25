@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
 import com.app.rahul.popularmovies.R;
+import com.app.rahul.popularmovies.activity.BaseActivity;
 import com.app.rahul.popularmovies.utility.MaterialProgressDialog;
 import com.app.rahul.popularmovies.utility.Utility;
+
 import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
 
 /**
@@ -23,6 +26,7 @@ public abstract class BaseFragment extends Fragment {
     private MaterialProgressDialog mMaterialProgressDialog;
     protected Snackbar mSnackBar;
     private ProgressBar mMaterialProgressBar;
+    protected View mParent;
 
     @Override
     public void onAttach(Context context) {
@@ -43,7 +47,7 @@ public abstract class BaseFragment extends Fragment {
         if (mMaterialProgressBar != null)
             mMaterialProgressBar.setIndeterminateDrawable(new IndeterminateProgressDrawable(mContext));
         mMaterialProgressDialog = Utility.getProgressDialogInstance(mContext);
-
+        mParent = findViewById(R.id.parent);
         initUi();
     }
 
@@ -72,8 +76,16 @@ public abstract class BaseFragment extends Fragment {
             else
                 mMaterialProgressBar.setVisibility(View.GONE);
         }
-
     }
+
+    protected void setToolBarColor(int resColor) {
+        ((BaseActivity) getActivity()).setToolBarColor(resColor);
+    }
+
+    protected void setToolBarTextColor(int resColor) {
+        ((BaseActivity) getActivity()).setToolBarTextColor(resColor);
+    }
+
 }
 
 

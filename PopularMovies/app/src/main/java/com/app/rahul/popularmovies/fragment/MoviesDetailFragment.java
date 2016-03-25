@@ -1,5 +1,6 @@
 package com.app.rahul.popularmovies.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.v7.graphics.Palette;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.app.rahul.popularmovies.ApplicationController;
 import com.app.rahul.popularmovies.R;
+import com.app.rahul.popularmovies.activity.ReviewsListingActivity;
 import com.app.rahul.popularmovies.adapter.TrailersAdapter;
 import com.app.rahul.popularmovies.database.MoviesListingDao;
 import com.app.rahul.popularmovies.model.movie_api.MoviesResponseBean;
@@ -75,6 +77,7 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
         TextView markFavoriteTv = (TextView) findViewById(R.id.mark_favorite);
         markFavoriteTv.setOnClickListener(this);
         seeMoreReviews = (TextView) findViewById(R.id.see_more_reviews);
+        seeMoreReviews.setOnClickListener(this);
         seeMoreReviews.setVisibility(View.GONE);
         if (!TextUtils.isEmpty(moviesResult.getPosterPath()))
             Picasso.with(mContext)
@@ -208,12 +211,16 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
                 @Override
                 public void onResponse(Response<ReviewsListingResponse> response1, Retrofit retrofit) {
                     ReviewsListingResponse responseBean = response1.body();
-                    ArrayList<ReviewsListingResponse.ReviewsEntity> reviewsEntities = responseBean.getResults();
-                    reviewsEntities.addAll(reviewsEntities);
-                    reviewsEntities.addAll(reviewsEntities);
-                    reviewsEntities.addAll(reviewsEntities);
+                    if (responseBean != null) {
+                        ArrayList<ReviewsListingResponse.ReviewsEntity> reviewsEntities = responseBean.getResults();
+                        if (reviewsEntities != null) {
+                            reviewsEntities.addAll(reviewsEntities);
+                            reviewsEntities.addAll(reviewsEntities);
+                            reviewsEntities.addAll(reviewsEntities);
 
-                    addReviews(responseBean.getResults());
+                            addReviews(responseBean.getResults());
+                        }
+                    }
                 }
 
                 @Override
@@ -266,6 +273,11 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
                     mSnackBar = SnackBarBuilder.make(mParent, moviesResult.getTitle() +
                             mContext.getString(R.string.removed_from_favourites)).build();
                 }
+                break;
+            case R.id.see_more_reviews:
+                Intent intent = new Intent(mContext, ReviewsListingActivity.class);
+                intent.putExtra(AppConstants.EXTRA_INTENT_PARCEL, moviesResult.getId());
+                startActivity(intent);
                 break;
         }
     }

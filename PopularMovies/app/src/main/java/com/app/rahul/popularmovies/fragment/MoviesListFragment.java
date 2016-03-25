@@ -115,24 +115,26 @@ public class MoviesListFragment extends BaseFragment implements SwipeRefreshLayo
                 public void onResponse(Response<MoviesResponseBean> response, Retrofit retrofit) {
                     showProgressBar(false);
                     MoviesResponseBean responseBean = response.body();
-                    moviesResultsList.addAll(responseBean.getResults());
+                    if (responseBean != null) {
+                        moviesResultsList.addAll(responseBean.getResults());
 
-                    if (mPagination == 1) {
-                        mGridView.setOnScrollListener(mEndlessScrollListener);
-                    }
+                        if (mPagination == 1) {
+                            mGridView.setOnScrollListener(mEndlessScrollListener);
+                        }
 
-                    if (mAdapter == null) {
-                        mAdapter = new MoviesListAdapter(mContext, moviesResultsList);
-                        mGridView.setAdapter(mAdapter);
-                    } else {
-                        mAdapter.notifyDataSetChanged();
-                    }
-                    if (responseBean.getResults().size() == 0) {
-                        mGridView.setOnScrollListener(null);
-                    }
+                        if (mAdapter == null) {
+                            mAdapter = new MoviesListAdapter(mContext, moviesResultsList);
+                            mGridView.setAdapter(mAdapter);
+                        } else {
+                            mAdapter.notifyDataSetChanged();
+                        }
+                        if (responseBean.getResults().size() == 0) {
+                            mGridView.setOnScrollListener(null);
+                        }
 
-                    if (responseBean.getResults().isEmpty())
-                        Lg.i("Retro", response.toString());
+                        if (responseBean.getResults().isEmpty())
+                            Lg.i("Retro", response.toString());
+                    }
                 }
 
                 @Override

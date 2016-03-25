@@ -114,10 +114,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_10"
-            android:text="234 234 24 2wef efg er egv eve "
             android:textSize="@dimen/text_size_16" />
 
         <FrameLayout
+            android:id="@+id/trailer_list_parent"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_80"
             android:layout_margin="@dimen/margin_10">

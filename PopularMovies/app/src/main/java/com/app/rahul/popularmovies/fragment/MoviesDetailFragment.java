@@ -189,8 +189,12 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
                 public void onResponse(Response<TrailersResponseBean> response1, Retrofit retrofit) {
                     mTrailersProgressBar.setVisibility(View.GONE);
                     TrailersResponseBean responseBean = response1.body();
-                    TrailersAdapter trailersAdapter = new TrailersAdapter(mContext, responseBean.getResults());
-                    mTrailersRecyclerView.setAdapter(trailersAdapter);
+                    if (responseBean != null && responseBean.getResults() != null && !responseBean.getResults().isEmpty()) {
+                        TrailersAdapter trailersAdapter = new TrailersAdapter(mContext, responseBean.getResults());
+                        mTrailersRecyclerView.setAdapter(trailersAdapter);
+                    } else {
+                        findViewById(R.id.trailer_list_parent).setVisibility(View.GONE);
+                    }
                 }
 
                 @Override
@@ -224,9 +228,10 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
                     ReviewsListingResponse responseBean = response1.body();
                     if (responseBean != null) {
                         ArrayList<ReviewsListingResponse.ReviewsEntity> reviewsEntities = responseBean.getResults();
-                        if (reviewsEntities != null) {
-                            reviewsEntities.addAll(reviewsEntities);
+                        if (reviewsEntities != null && !reviewsEntities.isEmpty()) {
                             addReviews(responseBean.getResults());
+                        } else {
+                            reviewsContainer.setVisibility(View.GONE);
                         }
                     }
                 }

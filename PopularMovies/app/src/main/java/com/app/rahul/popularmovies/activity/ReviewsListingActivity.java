@@ -45,7 +45,7 @@ public class ReviewsListingActivity extends BaseActivity implements SwipeRefresh
         }
     };
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private String movieId;
+    private long movieId;
     private ArrayList<ReviewsListingResponse.ReviewsEntity> moviesReviewsList = new ArrayList<>();
     private ReviewsListAdapter mAdapter;
 
@@ -58,7 +58,7 @@ public class ReviewsListingActivity extends BaseActivity implements SwipeRefresh
     public void initUi() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        movieId = getIntent().getStringExtra(AppConstants.EXTRA_INTENT_PARCEL);
+        movieId = getIntent().getLongExtra(AppConstants.EXTRA_INTENT_PARCEL, 0);
         mReviewsListView = (ListView) findViewById(R.id.reviews_listview);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -73,7 +73,7 @@ public class ReviewsListingActivity extends BaseActivity implements SwipeRefresh
             stringHashMap.put(AppConstants.PARAM_API_KEY, AppConstants.API_KEY);
             stringHashMap.put(AppConstants.PARAM_PAGE, mPagination + "");
 
-            Call<ReviewsListingResponse> beanCall = AppRetrofit.getInstance().getApiServices().apiMovieReviews(/*movieId*/140420, stringHashMap);
+            Call<ReviewsListingResponse> beanCall = AppRetrofit.getInstance().getApiServices().apiMovieReviews(movieId, stringHashMap);
             beanCall.enqueue(new Callback<ReviewsListingResponse>() {
                 @Override
                 public void onResponse(Response<ReviewsListingResponse> response1, Retrofit retrofit) {

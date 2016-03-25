@@ -224,7 +224,7 @@ public class MoviesDetailFragment extends BaseFragment implements View.OnClickLi
             mTrailersProgressBar.setVisibility(View.VISIBLE);
             HashMap<String, String> stringHashMap = new HashMap<>();
             stringHashMap.put(AppConstants.PARAM_API_KEY, AppConstants.API_KEY);
-            Call<ReviewsListingResponse> beanCall = AppRetrofit.getInstance().getApiServices().apiMovieReviews(/*moviesResult.getId()*/140420, stringHashMap);
+            Call<ReviewsListingResponse> beanCall = AppRetrofit.getInstance().getApiServices().apiMovieReviews(moviesResult.getId(), stringHashMap);
             beanCall.enqueue(new Callback<ReviewsListingResponse>() {
                 @Override
                 public void onResponse(Response<ReviewsListingResponse> response1, Retrofit retrofit) {

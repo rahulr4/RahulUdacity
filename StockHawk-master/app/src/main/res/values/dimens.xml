@@ -10,5 +10,12 @@
     <dimen name="widget_default_height">110dp</dimen>
     <dimen name="widget_default_width">110dp</dimen>
 
+    <dimen name="sp_20">20sp</dimen>
+    <dimen name="sp_25">25sp</dimen>
     <dimen name="widget_margin">8dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_72">72dp</dimen>
+    <dimen name="dp_3">3dp</dimen>
+    <dimen name="dp_0">0dp</dimen>
 </resources>

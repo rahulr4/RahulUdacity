@@ -2,6 +2,7 @@ package com.rahul.joke_display_lib;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
@@ -18,7 +19,18 @@ public class DisplayJokeActivity extends AppCompatActivity {
         // Processing the joke intent
         String joke = getIntent().getStringExtra(EXTRA_INTENT_JOKE);
         TextView textViewJoke = (TextView) findViewById(R.id.joke_tv);
-        textViewJoke.setText(joke);
+        if (textViewJoke != null) {
+            textViewJoke.setText(joke);
+        }
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -24,7 +24,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new EndpointsAsyncTask().execute();
+
+        getSupportFragmentManager().beginTransaction().
+                add(R.id.container,new MainFragment()).commit();
+
+//        new EndpointsAsyncTask().execute();
     }
 
     class EndpointsAsyncTask extends AsyncTask<Void, Void, Void> {

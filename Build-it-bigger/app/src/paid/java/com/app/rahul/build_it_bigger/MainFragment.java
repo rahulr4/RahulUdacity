@@ -9,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.google.android.gms.ads.AdView;
-
-
 public class MainFragment extends Fragment {
 
     private View clickMe;
@@ -26,8 +23,6 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AdView mAdView = (AdView) view.findViewById(R.id.adView);
-        mAdView.setVisibility(View.GONE);
 
         final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
         clickMe = view.findViewById(R.id.click_me);

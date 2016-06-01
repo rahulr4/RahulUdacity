@@ -16,7 +16,8 @@ import java.net.URL;
 public class RemoteEndpointUtil {
     private static final String TAG = "RemoteEndpointUtil";
 
-    private RemoteEndpointUtil() { }
+    private RemoteEndpointUtil() {
+    }
 
     public static JSONArray fetchJsonArray() {
         String itemsJson;

@@ -54,22 +54,36 @@ public class ArticleFragment extends BaseFragment implements LoaderManager.Loade
 
     private View mRootView;
 
-    @Bind(R.id.article_detail_photo) AspectLockedImageView mPhotoView;
-    @Bind(R.id.article_detail_photo_container) View mPhotoContainerView;
-    @Bind(R.id.article_detail_title) TextView mTitleTextView;
-    @Bind(R.id.article_detail_byline) TextView mBylineTextView;
-    @Bind(R.id.article_detail_body) TextView mBodyTextView;
-    @Bind(R.id.article_detail_content_container) View mContentContainerView;
-    @Bind(R.id.article_detail_meta_bar) View mMetaBarView;
-    @Bind(R.id.draw_insets_frame_layout) DrawInsetsFrameLayout mDrawInsetsFrameLayout;
-    @Bind(R.id.scrollview) ObservableScrollView mScrollView;
+    @Bind(R.id.article_detail_photo)
+    AspectLockedImageView mPhotoView;
+    @Bind(R.id.article_detail_photo_container)
+    View mPhotoContainerView;
+    @Bind(R.id.article_detail_title)
+    TextView mTitleTextView;
+    @Bind(R.id.article_detail_byline)
+    TextView mBylineTextView;
+    @Bind(R.id.article_detail_body)
+    TextView mBodyTextView;
+    @Bind(R.id.article_detail_content_container)
+    View mContentContainerView;
+    @Bind(R.id.article_detail_meta_bar)
+    View mMetaBarView;
+    @Bind(R.id.draw_insets_frame_layout)
+    DrawInsetsFrameLayout mDrawInsetsFrameLayout;
+    @Bind(R.id.scrollview)
+    ObservableScrollView mScrollView;
 
-    @BindBool(R.bool.article_detail_is_card) boolean mIsCard;
-    @BindDimen(R.dimen.article_detail_card_top_margin) int mStatusBarFullOpacityBottom;
+    @BindBool(R.bool.article_detail_is_card)
+    boolean mIsCard;
+    @BindDimen(R.dimen.article_detail_card_top_margin)
+    int mStatusBarFullOpacityBottom;
 
-    @BindColor(R.color.theme_primary) int mColorBackground;
-    @BindColor(R.color.body_text_white) int mColorTextTitle;
-    @BindColor(R.color.body_text_1_inverse) int mColorTextSubtitle;
+    @BindColor(R.color.theme_primary)
+    int mColorBackground;
+    @BindColor(R.color.body_text_white)
+    int mColorTextTitle;
+    @BindColor(R.color.body_text_1_inverse)
+    int mColorTextSubtitle;
 
     private Cursor mCursor;
     private long mItemId;
@@ -82,7 +96,8 @@ public class ArticleFragment extends BaseFragment implements LoaderManager.Loade
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ArticleFragment() { }
+    public ArticleFragment() {
+    }
 
     public static ArticleFragment newInstance(long itemId) {
         Bundle arguments = new Bundle();
@@ -239,7 +254,8 @@ public class ArticleFragment extends BaseFragment implements LoaderManager.Loade
                     .load(photoUrl)
                     .placeholder(R.color.photo_placeholder)
                     .listener(GlidePalette.with(photoUrl).intoCallBack(new CallBack() {
-                        @Override public void onPaletteLoaded(Palette palette) {
+                        @Override
+                        public void onPaletteLoaded(Palette palette) {
                             Palette.Swatch swatch = palette.getVibrantSwatch();
                             if (swatch != null) {
                                 mColorBackground = swatch.getRgb();

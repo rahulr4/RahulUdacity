@@ -30,9 +30,12 @@ import butterknife.OnClick;
 public class ArticleDetailActivity extends BaseActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    @Bind(R.id.pager) ViewPager mPager;
-    @Bind(R.id.up_container) View mUpButtonContainer;
-    @Bind(R.id.action_up) View mUpButton;
+    @Bind(R.id.pager)
+    ViewPager mPager;
+    @Bind(R.id.up_container)
+    View mUpButtonContainer;
+    @Bind(R.id.action_up)
+    View mUpButton;
 
     private Cursor mCursor;
     private long mStartId;
@@ -73,7 +76,9 @@ public class ArticleDetailActivity extends BaseActivity
                 if (mCursor != null) {
                     mCursor.moveToPosition(position);
                 }
-                mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
+                if (mCursor != null) {
+                    mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
+                }
                 updateUpButtonPosition();
             }
         });
@@ -81,7 +86,8 @@ public class ArticleDetailActivity extends BaseActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mUpButtonContainer.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
                 @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
-                @Override public WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
+                @Override
+                public WindowInsets onApplyWindowInsets(View view, WindowInsets windowInsets) {
                     view.onApplyWindowInsets(windowInsets);
                     mTopInset = windowInsets.getSystemWindowInsetTop();
                     mUpButtonContainer.setTranslationY(mTopInset);

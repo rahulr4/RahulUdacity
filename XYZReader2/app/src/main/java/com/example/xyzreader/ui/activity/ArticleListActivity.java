@@ -34,9 +34,12 @@ import butterknife.Bind;
 public class ArticleListActivity extends BaseActivity implements
         LoaderManager.LoaderCallbacks<Cursor>, SwipeRefreshLayout.OnRefreshListener, ArticlesAdapter.OnArticleItemClickListener {
 
-    @Bind(R.id.toolbar) Toolbar mToolbar;
-    @Bind(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
-    @Bind(R.id.recycler_view) RecyclerView mRecyclerView;
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
+    @Bind(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.recycler_view)
+    RecyclerView mRecyclerView;
 
     private boolean mIsRefreshing = false;
     private BroadcastReceiver mRefreshingReceiver = new BroadcastReceiver() {

@@ -258,7 +258,7 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
                     mLowPaint.setAntiAlias(!inAmbientMode);
                 }
 
-                if(inAmbientMode){
+                if (inAmbientMode) {
                     Resources resources = getResources();
                     mBackgroundPaint.setColor(resources.getColor(android.R.color.black));
                     mHandPaint.setColor(resources.getColor(android.R.color.white));
@@ -266,7 +266,7 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
                     mTextPaint.setColor(resources.getColor(android.R.color.white));
                     mHighPaint.setColor(resources.getColor(android.R.color.white));
                     mLowPaint.setColor(resources.getColor(android.R.color.white));
-                }else{
+                } else {
                     mBackgroundPaint.setColor(mBackgroundColor);
                     mHandPaint.setColor(mHandsColor);
                     mHandPaint.setStrokeWidth(mHandsStrokeWidth);
@@ -312,17 +312,17 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
 
             canvas.drawTextOnPath(date, textPath, 0, 0, mTextPaint);
 
-            if(highTemp != 0.0 && lowTemp != 0.0){
-                String high = String.valueOf((int) highTemp)+"°";
-                String low = String.valueOf((int) lowTemp)+"°";
+            if (highTemp != 0.0 && lowTemp != 0.0) {
+                String high = String.valueOf((int) highTemp) + "°";
+                String low = String.valueOf((int) lowTemp) + "°";
 
-                canvas.drawText(high, centerX - (centerX/2) - tempsOffset + mArcsMargin, centerY, mHighPaint);
-                canvas.drawText("max", centerX - (centerX/2) - tempsOffset + mArcsMargin, centerY + mTextPaint.getTextSize(), mTextPaint);
-                canvas.drawText(low, centerX + (centerX/2) + tempsOffset - mArcsMargin, centerY , mLowPaint);
-                canvas.drawText("min", centerX + (centerX/2) + tempsOffset - mArcsMargin, centerY + mTextPaint.getTextSize(), mTextPaint);
+                canvas.drawText(high, centerX - (centerX / 2) - tempsOffset + mArcsMargin, centerY, mHighPaint);
+                canvas.drawText("max", centerX - (centerX / 2) - tempsOffset + mArcsMargin, centerY + mTextPaint.getTextSize(), mTextPaint);
+                canvas.drawText(low, centerX + (centerX / 2) + tempsOffset - mArcsMargin, centerY, mLowPaint);
+                canvas.drawText("min", centerX + (centerX / 2) + tempsOffset - mArcsMargin, centerY + mTextPaint.getTextSize(), mTextPaint);
             }
 
-            if(!mAmbient) {
+            if (!mAmbient) {
                 Bitmap weatherBitmap = BitmapFactory.decodeResource(getResources(), Utility.getArtResourceForWeatherCondition(weatherId));
                 if (weatherBitmap != null) {
                     Log.d(TAG, "Bitmap is Null, weather_id = " + weatherId);
@@ -332,7 +332,7 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
                 }
             }
 
-            if(!mAmbient) {
+            if (!mAmbient) {
                 mSecRectF.set(bounds.left + mArcsMargin, bounds.top + mArcsMargin, bounds.right - mArcsMargin, bounds.bottom - mArcsMargin);
                 canvas.drawArc(mSecRectF, -90, secRot, false, mHandPaint);
             }
@@ -347,7 +347,6 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
             canvas.drawArc(mHourRectF, !mAmbient ? -90 : (-90 + hrRot - 10), !mAmbient ? Math.max(hrRot, 1f) : 10, false, mHandPaint);
 
 
-
             float innerTickRadius = centerX - 20;
             float outerTickRadius = centerX;
             for (int tickIndex = 0; tickIndex < 12; tickIndex++) {
@@ -359,8 +358,6 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
                 canvas.drawLine(centerX + innerX, centerY + innerY,
                         centerX + outerX, centerY + outerY, mTextPaint);
             }
-
-
 
 
         }
@@ -422,7 +419,7 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
 
             mArcsMargin = insets.getSystemWindowInsetBottom();
 
-            if(mArcsMargin == 0){
+            if (mArcsMargin == 0) {
                 mArcsMargin = 5;
             }
 
@@ -476,14 +473,14 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
 
             Wearable.DataApi.addListener(mGoogleApiClient, Engine.this);
 
-            SunshineWatchfaceUtil.fetchConfigDataMap(mGoogleApiClient,
-                    new SunshineWatchfaceUtil.FetchConfigDataMapCallback() {
+            SWUtils.fetchConfigDataMap(mGoogleApiClient,
+                    new SWUtils.FetchConfigDataMapCallback() {
                         @Override
                         public void onConfigDataMapFetched(DataMap startupConfig) {
                             // If the DataItem hasn't been created yet or some keys are missing,
                             // use the default values.
 
-                            //SunshineWatchfaceUtil.putConfigDataItem(mGoogleApiClient, startupConfig);
+                            //SWUtils.putConfigDataItem(mGoogleApiClient, startupConfig);
 
                             updateUiforDataMap(startupConfig);
                         }
@@ -537,9 +534,9 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
             Resources resources = getResources();
             Bitmap bitmap = BitmapFactory.decodeResource(resources, Utility.getArtResourceForWeatherCondition(weatherId));
 
-            if(bitmap != null) {
+            if (bitmap != null) {
 
-                SunshineWatchfaceUtil.putConfigDataItem(mGoogleApiClient, dataMap);
+                SWUtils.putConfigDataItem(mGoogleApiClient, dataMap);
 
                 Palette palette = new Palette.Builder(bitmap).generate();
 
@@ -547,7 +544,7 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
                 mHandsColor = palette.getVibrantColor(resources.getColor(android.R.color.white));
                 mSecHandColor = palette.getDarkVibrantColor(resources.getColor(android.R.color.white));
 
-                if(!mAmbient) {
+                if (!mAmbient) {
                     mBackgroundPaint.setColor(mBackgroundColor);
                     mHighPaint.setColor(mHandsColor);
                     mSecPaint.setColor(mSecHandColor);
@@ -581,8 +578,6 @@ public class SunshineWatchFace extends CanvasWatchFaceService {
             }
         }
     }
-
-
 
 
 }

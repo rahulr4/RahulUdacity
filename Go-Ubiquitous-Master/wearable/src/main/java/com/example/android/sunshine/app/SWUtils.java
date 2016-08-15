@@ -13,24 +13,21 @@ import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.Wearable;
 
-/**
- * Created by Jose on 8/22/15.
- */
-public class SunshineWatchfaceUtil {
+class SWUtils {
 
-    private static final String TAG = "SunshineWatchFaceUtil";
+    private static final String TAG = SWUtils.class.getSimpleName();
 
 
     /**
      * The path for the {@link DataItem} containing {@link SunshineWatchFace} configuration.
      */
-    public static final String PATH_WITH_FEATURE = "/forecast";
+    private static final String PATH_WITH_FEATURE = "/forecast";
 
     /**
      * Callback interface to perform an action with the current config {@link DataMap} for
      * {@link SunshineWatchFace}.
      */
-    public interface FetchConfigDataMapCallback {
+    interface FetchConfigDataMapCallback {
         /**
          * Callback invoked with the current config {@link DataMap} for
          * {@link SunshineWatchFace}.
@@ -45,8 +42,8 @@ public class SunshineWatchfaceUtil {
      * If the current config {@link DataItem} doesn't exist, it isn't created and the callback
      * receives an empty DataMap.
      */
-    public static void fetchConfigDataMap(final GoogleApiClient client,
-                                          final FetchConfigDataMapCallback callback) {
+    static void fetchConfigDataMap(final GoogleApiClient client,
+                                   final FetchConfigDataMapCallback callback) {
         Wearable.NodeApi.getLocalNode(client).setResultCallback(
                 new ResultCallback<NodeApi.GetLocalNodeResult>() {
                     @Override
@@ -54,7 +51,7 @@ public class SunshineWatchfaceUtil {
                         String localNode = getLocalNodeResult.getNode().getId();
                         Uri uri = new Uri.Builder()
                                 .scheme("wear")
-                                .path(SunshineWatchfaceUtil.PATH_WITH_FEATURE)
+                                .path(SWUtils.PATH_WITH_FEATURE)
                                 .authority(localNode)
                                 .build();
                         Wearable.DataApi.getDataItem(client, uri)
@@ -68,7 +65,7 @@ public class SunshineWatchfaceUtil {
      * Overwrites the current config {@link DataItem}'s {@link DataMap} with {@code newConfig}.
      * If the config DataItem doesn't exist, it's created.
      */
-    public static void putConfigDataItem(GoogleApiClient googleApiClient, DataMap newConfig) {
+    static void putConfigDataItem(GoogleApiClient googleApiClient, DataMap newConfig) {
         PutDataMapRequest putDataMapRequest = PutDataMapRequest.create(PATH_WITH_FEATURE);
         DataMap configToPut = putDataMapRequest.getDataMap();
         configToPut.putAll(newConfig);
@@ -87,7 +84,7 @@ public class SunshineWatchfaceUtil {
 
         private final FetchConfigDataMapCallback mCallback;
 
-        public DataItemResultCallback(FetchConfigDataMapCallback callback) {
+        DataItemResultCallback(FetchConfigDataMapCallback callback) {
             mCallback = callback;
         }
 

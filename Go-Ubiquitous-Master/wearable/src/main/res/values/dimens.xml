@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="analog_hand_stroke">3dp</dimen>
+    <dimen name="analog_hand_stroke_ambient">1dp</dimen>
+    <dimen name="analog_sec_hand_stroke">10dp</dimen>
+    <dimen name="analog_text_size">40dp</dimen>
+    <dimen name="analog_text_size_round">45dp</dimen>
+    <dimen name="analog_date_text_size">12dp</dimen>
+    <dimen name="analog_high_temp_text_size">20dp</dimen>
+    <dimen name="analog_low_temp_text_size">20dp</dimen>
+    <dimen name="analog_am_pm_size">25dp</dimen>
+    <dimen name="analog_am_pm_size_round">30dp</dimen>
+    <dimen name="analog_x_offset">15dp</dimen>
+    <dimen name="analog_x_offset_round">25dp</dimen>
+    <dimen name="analog_y_offset">40dp</dimen>
+    <dimen name="analog_line_height">25dp</dimen>
+    <dimen name="analog_config_color_picker_item_margin">32dp</dimen>
+    <dimen name="content_padding_start">12dp</dimen>
+    <dimen name="interactive_text_size">20dp</dimen>
+    <dimen name="interactive_text_size_round">25dp</dimen>
+    <dimen name="interactive_x_offset">15dp</dimen>
+    <dimen name="interactive_x_offset_round">25dp</dimen>
+    <dimen name="interactive_y_offset">72dp</dimen>
+    <dimen name="interactive_y_offset_round">84dp</dimen>
+    <dimen name="interactive_line_height">25dp</dimen>
+    <dimen name="analog_temps_margin">15dp</dimen>
+</resources>

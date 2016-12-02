@@ -12,9 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.app.qatarcool.R;
-import com.app.qatarcool.custom_ui.MaterialProgressDialog;
-import com.app.qatarcool.utils.Utility;
+import com.rahul.udacity.cs2.R;
+import com.rahul.udacity.cs2.custom_ui.MaterialProgressDialog;
+import com.rahul.udacity.cs2.utility.Utility;
+
 
 public abstract class BaseFragment extends Fragment {
     private View view;

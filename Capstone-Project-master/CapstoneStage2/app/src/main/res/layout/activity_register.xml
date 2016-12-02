@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_back_header_trans" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/full_name_ed"
+                    fontPath="fonts/NeoSansCyr-Regular.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_box_height"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:drawableLeft="@drawable/ic_username"
+                    android:drawablePadding="@dimen/margin_5"
+                    android:gravity="center_vertical"
+                    android:hint="@string/full_name"
+                    android:maxLength="50"
+                    android:nextFocusDown="@+id/username_ed"
+                    android:paddingRight="@dimen/margin_10"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/blue_005e96"
+                    android:textColorHint="@color/blue_a3b9c3"
+                    android:textSize="@dimen/text_16" />
+
+                <EditText
+                    android:id="@+id/username_ed"
+                    fontPath="fonts/NeoSansCyr-Regular.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_box_height"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:drawableLeft="@drawable/ic_username"
+                    android:drawablePadding="@dimen/margin_5"
+                    android:gravity="center_vertical"
+                    android:hint="@string/username"
+                    android:maxLength="50"
+                    android:nextFocusDown="@+id/email_ed"
+                    android:paddingRight="@dimen/margin_10"
+                    android:singleLine="true"
+                    android:textColor="@color/blue_005e96"
+                    android:textColorHint="@color/blue_a3b9c3"
+                    android:textSize="@dimen/text_16" />
+
+                <EditText
+                    android:id="@+id/email_ed"
+                    fontPath="fonts/NeoSansCyr-Regular.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_box_height"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:drawableLeft="@drawable/ic_email"
+                    android:drawablePadding="@dimen/margin_5"
+                    android:gravity="center_vertical"
+                    android:hint="@string/email_id"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="100"
+                    android:nextFocusDown="@+id/password_ed"
+                    android:paddingRight="@dimen/margin_10"
+                    android:singleLine="true"
+                    android:textColor="@color/blue_005e96"
+                    android:textColorHint="@color/blue_a3b9c3"
+                    android:textSize="@dimen/text_16" />
+
+                <EditText
+                    android:id="@+id/password_ed"
+                    fontPath="fonts/NeoSansCyr-Regular.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_box_height"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:drawableLeft="@drawable/ic_password"
+                    android:drawablePadding="@dimen/margin_5"
+                    android:gravity="center_vertical"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:maxLength="18"
+                    android:nextFocusDown="@+id/re_password_ed"
+                    android:paddingRight="@dimen/margin_10"
+                    android:singleLine="true"
+                    android:textColor="@color/blue_005e96"
+                    android:textColorHint="@color/blue_a3b9c3"
+                    android:textSize="@dimen/text_16" />
+
+                <EditText
+                    android:id="@+id/re_password_ed"
+                    fontPath="fonts/NeoSansCyr-Regular.ttf"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_box_height"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:drawableLeft="@drawable/ic_password"
+                    android:drawablePadding="@dimen/margin_5"
+                    android:gravity="center_vertical"
+                    android:hint="@string/retype_password"
+                    android:inputType="textPassword"
+                    android:maxLength="18"
+                    android:nextFocusDown="@+id/email_ed"
+                    android:paddingRight="@dimen/margin_10"
+                    android:singleLine="true"
+                    android:textColor="@color/blue_005e96"
+                    android:textColorHint="@color/blue_a3b9c3"
+                    android:textSize="@dimen/text_16" />
+
+
+                <TextView
+                    android:id="@+id/register_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/text_box_height"
+                    android:layout_marginBottom="@dimen/margin_20"
+                    android:layout_marginLeft="@dimen/margin_16"
+                    android:layout_marginRight="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:alpha="0.9"
+                    android:background="@drawable/shape_color_5bd7c6_round"
+                    android:gravity="center"
+                    android:text="@string/register"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_17" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+</layout>

@@ -8,16 +8,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.app.qatarcool.R;
-import com.app.qatarcool.custom_ui.MaterialProgressDialog;
-import com.app.qatarcool.utils.Lg;
-import com.app.qatarcool.utils.Utility;
 import com.rahul.media.model.Define;
+import com.rahul.udacity.cs2.R;
+import com.rahul.udacity.cs2.custom_ui.MaterialProgressDialog;
+import com.rahul.udacity.cs2.utility.Utility;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -96,9 +96,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
             case android.R.id.home:
                 onHeaderBackClicked();
                 return true;
-            case R.id.menu_notification:
-                Utility.showSnackBar(getActivity(), getString(R.string.feature_coming_soon));
-                return true;
 
             default:
                 break;
@@ -135,7 +132,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                     blockingProgressDialog.dismiss();
             }
         } catch (Exception ignored) {
-            Lg.i("Error", ignored.getMessage());
+            Log.i("Error", ignored.getMessage());
         }
     }
 

@@ -42,6 +42,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rahul.udacity.cs2.R;
+import com.rahul.udacity.cs2.custom_ui.CustomToast;
+import com.rahul.udacity.cs2.custom_ui.MaterialProgressDialog;
+import com.rahul.udacity.cs2.interfaces.callbacks.OkCancelCallback;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -1166,10 +1169,6 @@ public class Utility {
         amPmTv.setText(am_pm);
     }
 
-    public static void showWorkInProgressToast(Context mContext) {
-        Toast.makeText(mContext, mContext.getString(R.string.work_in_progress), Toast.LENGTH_SHORT).show();
-    }
-
     public static boolean checkDateTimeFormatValid(String date, String sourceFormat) {
         SimpleDateFormat sdf = new SimpleDateFormat(sourceFormat);
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -1225,7 +1224,7 @@ public class Utility {
         mAlertDialog = new AlertDialog.Builder(mContext).setMessage(text)
                 .setCancelable(false)
                 .setTitle(mContext.getString(R.string.app_name)).setIcon(R.mipmap.ic_launcher).setCancelable(false)
-                .setPositiveButton(mContext.getString(R.string.sure), new DialogInterface.OnClickListener() {
+                .setPositiveButton(mContext.getString(R.string.confirm), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mAlertDialog.dismiss();

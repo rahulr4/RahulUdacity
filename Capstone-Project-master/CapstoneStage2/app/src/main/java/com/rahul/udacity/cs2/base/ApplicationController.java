@@ -4,12 +4,9 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
-import com.app.qatarcool.R;
-import com.app.qatarcool.database.DatabaseHelper;
-import com.app.qatarcool.utils.Utility;
-import com.crashlytics.android.Crashlytics;
+import com.rahul.udacity.cs2.R;
+import com.rahul.udacity.cs2.utility.Utility;
 
-import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
@@ -34,10 +31,8 @@ public class ApplicationController extends Application implements Application.Ac
         super.onCreate();
         registerActivityLifecycleCallbacks(this);
 
-        Fabric.with(this, new Crashlytics());
         mInstance = this;
         mIsNetworkConnected = Utility.getNetworkState(this);
-        DatabaseHelper.getDatabaseHelperInstance(this);
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/NeoSansCyr-Regular.ttf").setFontAttrId(R.attr.fontPath).build());
     }

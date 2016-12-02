@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_4d4d4d"
+    android:background="@drawable/bg"
     android:fitsSystemWindows="true">
 
     <ScrollView
@@ -15,8 +15,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="200dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_30"
                 android:src="@drawable/simply_travel" />
@@ -28,8 +28,8 @@
                 android:layout_height="@dimen/text_box_height"
                 android:layout_marginLeft="@dimen/margin_30"
                 android:layout_marginRight="@dimen/margin_30"
-                android:layout_marginTop="@dimen/margin_40"
-                android:background="@drawable/shape_white_round"
+                android:layout_marginTop="@dimen/margin_100"
+                android:background="@drawable/shape_black_round"
                 android:gravity="center"
                 android:hint="@string/username"
                 android:maxLength="50"
@@ -37,8 +37,8 @@
                 android:paddingLeft="@dimen/margin_20"
                 android:paddingRight="@dimen/margin_20"
                 android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black" />
 
             <EditText
                 android:id="@+id/password_ed"
@@ -47,7 +47,7 @@
                 android:layout_marginLeft="@dimen/margin_30"
                 android:layout_marginRight="@dimen/margin_30"
                 android:layout_marginTop="@dimen/margin_20"
-                android:background="@drawable/shape_white_round"
+                android:background="@drawable/shape_black_round"
                 android:gravity="center"
                 android:hint="@string/password"
                 android:imeOptions="actionDone|actionGo"
@@ -55,8 +55,8 @@
                 android:maxLength="15"
                 android:paddingLeft="@dimen/margin_20"
                 android:paddingRight="@dimen/margin_20"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black" />
 
 
             <TextView
@@ -68,6 +68,7 @@
                 android:layout_marginTop="@dimen/margin_40"
                 android:background="@drawable/shape_color_primary_round"
                 android:gravity="center"
+                android:alpha="0.9"
                 android:text="@string/login"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_16" />
@@ -77,8 +78,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/text_box_height"
                 android:layout_marginLeft="@dimen/margin_30"
+                android:alpha="0.9"
                 android:layout_marginRight="@dimen/margin_30"
-                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_30"
                 android:background="@drawable/shape_color_5bd7c6_round"
                 android:gravity="center"
                 android:text="@string/register"

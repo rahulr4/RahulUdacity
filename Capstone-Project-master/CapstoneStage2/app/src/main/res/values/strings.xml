@@ -31,9 +31,24 @@
     <string name="date_util_unit_months">months</string>
     <string name="date_util_unit_year">year</string>
     <string name="date_util_unit_years">years</string>
+    <string name="date_util_suffix">ago</string>
 
     <string name="no_internet_connection">No internet connection</string>
     <string name="enter_valid_credentials">Please enter valid credentials.</string>
-    <string name="username_required">Please enter username</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="username_required">Please enter valid username</string>
+    <string name="mobile_valid_required">Mobile number must be between 8–13 digits</string>
+    <string name="password_match_validation">Both password must be same</string>
+    <string name="email_required">Please enter valid email</string>
+    <string name="old_pass_required">Please enter old password</string>
+    <string name="password_min_required">Password length should be between 6–18 characters</string>
+    <string name="new_pass_required">Please enter new password</string>
+    <string name="conf_pass_required">Please enter confirm password</string>
+    <string name="new_conf_match">New password and confirm password must match</string>
+    <string name="email_valid_required">Please enter valid email</string>
     <string name="password_required">Please enter password</string>
+    <string name="email_id">Email Address</string>
+    <string name="full_name">Full Name</string>
+    <string name="registration_failed">Registration failed. Please try again</string>
+    <string name="user_exists">User already exists</string>
 </resources>

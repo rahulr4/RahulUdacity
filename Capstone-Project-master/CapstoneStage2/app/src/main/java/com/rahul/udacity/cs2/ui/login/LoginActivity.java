@@ -1,12 +1,14 @@
 package com.rahul.udacity.cs2.ui.login;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.BaseActivity;
 import com.rahul.udacity.cs2.model.RequestBean;
+import com.rahul.udacity.cs2.ui.register.RegisterActivity;
 import com.rahul.udacity.cs2.utility.Constants;
 import com.rahul.udacity.cs2.utility.Utility;
 
@@ -53,8 +55,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
                 mPresenter.attemptLogin(requestBean);
                 break;
             case R.id.register_tv:
-//                Intent intent = new Intent(getActivity(), RegisterActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                startActivity(intent);
                 break;
         }
     }

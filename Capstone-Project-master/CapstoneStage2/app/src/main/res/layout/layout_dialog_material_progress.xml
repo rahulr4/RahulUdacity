@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AA000000"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/margin_12"
+    android:paddingLeft="@dimen/margin_13"
+    android:paddingRight="@dimen/margin_10"
+    android:paddingTop="@dimen/margin_12">
+
+    <ImageView
+        android:id="@+id/my_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/loader" />
+
+
+    <TextView
+        android:id="@+id/progress_dialog_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="@dimen/margin_10"
+        android:singleLine="true"
+        android:text="@string/please_wait"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_14"
+        android:visibility="gone" />
+</LinearLayout>

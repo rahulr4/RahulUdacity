@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#1BA8CE</color>
+    <color name="colorPrimaryDark">#1BA8CE</color>
+    <color name="colorAccent">#1BA8CE</color>
+
+
+    <color name="black_4d4d4d">#4d4d4d</color>
+    <color name="black_050505">#050505</color>
+
+    <color name="grey_9aa7ad">#9AA7AD</color>
+    <color name="grey_b6b7b9">#B6B7B9</color>
+    <color name="grey_7c7d7e">#7C7D7E</color>
+    <color name="grey_c8d0d3">#C8D0D3</color>
+    <color name="grey_efeff6">#EFEFF6</color>
+    <color name="grey_99a4ae">#99a4ae</color>
+    <color name="grey_535353">#535353</color>
+    <color name="grey_9ba6ad">#9BA6AD</color>
+
+    <color name="blue_41a9e1">#41A9E1</color>
+
+    <color name="green_5bd7c6">#64AA2C</color>
+    <color name="green_c8d373">#C8D373</color>
+    <color name="green_71af3d">#71AF3D</color>
+    <color name="green_71cbc6">#71CBC6</color>
+    <color name="green_678d45">#678d45</color>
+    <color name="green_6ecbc6">#6ecbc6</color>
+    <color name="green_cad46d">#cad46d</color>
+
+    <color name="yellow_f5ae40">#F5AE40</color>
+    <color name="yellow_ffd18e">#ffd18e</color>
+    <color name="yellow_c8d473">#C8D473</color>
+    <color name="yellow_fdd093">#FDD093</color>
+
+
+    <color name="orange_f49b45">#F49B45</color>
+    <color name="orange_f79c38">#f79c38</color>
+
+    <color name="blue_5cc9de">#5CC9DE</color>
+    <color name="blue_71cbc6">#71CBC6</color>
+    <color name="blue_c5dae5">#C5DAE5</color>
+    <color name="blue_a3b9c3">#a3b9c3</color>
+    <color name="blue_005e96">#005e96</color>
+    <color name="blue_07a4cb">#07A4CB</color>
+    <color name="blue_b3c9db">#B3C9DB</color>
+    <color name="blue_1473b4">#1473B4</color>
+    <color name="blue_004885">#004885</color>
+    <color name="blue_247bb9">#247bb9</color>
+    <color name="blue_004987">#004987</color>
+    <color name="blue_5dc9df">#5DC9DF</color>
+    <color name="blue_71ccc6">#71CCC6</color>
+
+
+    <color name="white_feffff">#FEFFFF</color>
+    <color name="white_DEEDF2">#DEEDF2</color>
+
 </resources>

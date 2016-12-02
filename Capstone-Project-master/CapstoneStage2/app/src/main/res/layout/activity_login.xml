@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_4d4d4d"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_30"
+                android:src="@drawable/simply_travel" />
+
+
+            <EditText
+                android:id="@+id/username_ed"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_box_height"
+                android:layout_marginLeft="@dimen/margin_30"
+                android:layout_marginRight="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_40"
+                android:background="@drawable/shape_white_round"
+                android:gravity="center"
+                android:hint="@string/username"
+                android:maxLength="50"
+                android:nextFocusDown="@+id/password_ed"
+                android:paddingLeft="@dimen/margin_20"
+                android:paddingRight="@dimen/margin_20"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
+
+            <EditText
+                android:id="@+id/password_ed"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_box_height"
+                android:layout_marginLeft="@dimen/margin_30"
+                android:layout_marginRight="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_20"
+                android:background="@drawable/shape_white_round"
+                android:gravity="center"
+                android:hint="@string/password"
+                android:imeOptions="actionDone|actionGo"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:paddingLeft="@dimen/margin_20"
+                android:paddingRight="@dimen/margin_20"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
+
+
+            <TextView
+                android:id="@+id/login_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_box_height"
+                android:layout_marginLeft="@dimen/margin_30"
+                android:layout_marginRight="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_40"
+                android:background="@drawable/shape_color_primary_round"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:id="@+id/register_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_box_height"
+                android:layout_marginLeft="@dimen/margin_30"
+                android:layout_marginRight="@dimen/margin_30"
+                android:layout_marginTop="@dimen/margin_20"
+                android:background="@drawable/shape_color_5bd7c6_round"
+                android:gravity="center"
+                android:text="@string/register"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_16" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

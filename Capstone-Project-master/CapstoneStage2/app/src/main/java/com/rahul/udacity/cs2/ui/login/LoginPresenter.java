@@ -9,6 +9,9 @@ import com.rahul.udacity.cs2.model.RequestBean;
 import com.rahul.udacity.cs2.ui.common.ApiListener;
 import com.rahul.udacity.cs2.utility.Utility;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
 public class LoginPresenter implements ApiListener {
 
     /******************************************************************************************
@@ -50,12 +53,12 @@ public class LoginPresenter implements ApiListener {
     }
 
     @Override
-    public void onApiSuccess(String response) {
+    public void onApiSuccess(ArrayList<LinkedHashMap> response) {
         view.showProgress(false);
-        if (response.equalsIgnoreCase("Failed"))
-            view.loginFailed(response);
+        if (response == null || response.isEmpty())
+            view.loginFailed("Failed");
         else
-            view.navigateHome();
+            view.navigateHome(response);
     }
 
     @Override

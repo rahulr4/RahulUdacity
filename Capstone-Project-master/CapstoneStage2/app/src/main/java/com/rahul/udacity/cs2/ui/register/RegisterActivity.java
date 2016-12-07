@@ -53,7 +53,6 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
     public void navigateHome() {
         ActivityRegisterBinding activityRegisterBinding = (ActivityRegisterBinding) this.viewDataBinding;
 
-        Utility.putBooleanValueInSharedPreference(getActivity(), Constants.PREFS_REMEMBER_LOGIN, false);
         Utility.putBooleanValueInSharedPreference(getActivity(), Constants.PREFS_LOGGED_IN, true);
         Utility.putStringValueInSharedPreference(getActivity(), Constants.PREFS_USER_NAME, activityRegisterBinding.usernameEd.getText().toString().trim());
         Utility.putStringValueInSharedPreference(getActivity(), Constants.PREFS_PASSWORD, activityRegisterBinding.passwordEd.getText().toString().trim());

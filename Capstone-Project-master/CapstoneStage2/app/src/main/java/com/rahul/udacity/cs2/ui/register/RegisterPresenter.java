@@ -9,6 +9,9 @@ import com.rahul.udacity.cs2.model.RequestBean;
 import com.rahul.udacity.cs2.ui.common.ApiListener;
 import com.rahul.udacity.cs2.utility.Utility;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
 class RegisterPresenter implements ApiListener {
 
     private RegisterView view;
@@ -54,7 +57,7 @@ class RegisterPresenter implements ApiListener {
     }
 
     @Override
-    public void onApiSuccess(String response) {
+    public void onApiSuccess(ArrayList<LinkedHashMap> response) {
         view.showProgress(false);
         if (response.equalsIgnoreCase("Failed")) {
             view.registerFailed(response);

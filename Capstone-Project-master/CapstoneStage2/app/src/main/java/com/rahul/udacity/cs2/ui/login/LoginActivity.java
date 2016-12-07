@@ -12,6 +12,9 @@ import com.rahul.udacity.cs2.ui.register.RegisterActivity;
 import com.rahul.udacity.cs2.utility.Constants;
 import com.rahul.udacity.cs2.utility.Utility;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
 
 /**
  * Created by rahulgupta on 10/11/16.
@@ -62,9 +65,12 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     @Override
-    public void navigateHome() {
-        Utility.putStringValueInSharedPreference(getActivity(), Constants.PREFS_USER_NAME, mUserNameEd.getText().toString().trim());
-        Utility.putStringValueInSharedPreference(getActivity(), Constants.PREFS_PASSWORD, mPasswordEd.getText().toString().trim());
+    public void navigateHome(ArrayList<LinkedHashMap> response) {
+
+        LinkedHashMap linkedHashMap = response.get(0);
+        Utility.putBooleanValueInSharedPreference(getActivity(), Constants.PREFS_LOGGED_IN, true);
+        Utility.putStringValueInSharedPreference(getActivity(), Constants.PREFS_USER_NAME, (String) linkedHashMap.get("username"));
+        Utility.putStringValueInSharedPreference(getActivity(), Constants.PREFS_PASSWORD, (String) linkedHashMap.get("password"));
 
         /*Intent intent = new Intent(getActivity(), HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK

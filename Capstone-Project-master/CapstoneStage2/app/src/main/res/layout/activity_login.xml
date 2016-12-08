@@ -74,7 +74,7 @@
                 android:textSize="@dimen/text_16" />
 
             <TextView
-                android:id="@+id/register_tv"
+                android:id="@+id/facebook"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/text_box_height"
                 android:layout_marginLeft="@dimen/margin_30"
@@ -83,7 +83,7 @@
                 android:layout_marginTop="@dimen/margin_30"
                 android:background="@drawable/shape_color_5bd7c6_round"
                 android:gravity="center"
-                android:text="@string/register"
+                android:text="@string/login_with_facebook"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_16" />
 

@@ -59,14 +59,6 @@ class RegisterPresenter implements ApiListener {
     @Override
     public void onApiSuccess(ArrayList<LinkedHashMap> response) {
         view.showProgress(false);
-        if (response.equalsIgnoreCase("Failed")) {
-            view.registerFailed(response);
-            Utility.showSnackBar((Activity) getViewContext(), getViewContext().getString(R.string.registration_failed));
-        } else if (response.equalsIgnoreCase("UserExists")) {
-            view.registerFailed(response);
-            Utility.showSnackBar((Activity) getViewContext(), getViewContext().getString(R.string.user_exists));
-        } else
-            view.navigateHome();
     }
 
     @Override

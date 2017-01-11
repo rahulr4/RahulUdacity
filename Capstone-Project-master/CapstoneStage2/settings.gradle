@@ -1,1 +1,1 @@
-include ':app', ':kumulos-2.1.0-debug'
+include ':app', ':kumulos-2.1.0-debug', ':facebooklibrary'

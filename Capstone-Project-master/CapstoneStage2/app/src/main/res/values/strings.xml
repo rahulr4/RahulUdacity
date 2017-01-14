@@ -1,4 +1,5 @@
 <resources>
+    <string name="facebook_app_id">623432824524593</string>
     <string name="app_name">Simply Travel</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -52,4 +53,14 @@
     <string name="registration_failed">Registration failed. Please try again</string>
     <string name="user_exists">User already exists</string>
     <string name="login_with_facebook">Login with Facebook</string>
+    <string name="choose_place">Choose Place</string>
+    <string name="exit_app_message">Are you sure you exit app ?</string>
+    <string name="guest_user">Guest User</string>
+    <string name="navigation_drawer_open" />
+    <string name="my_saved_restaurants">My Saved Restaurants</string>
+    <string name="my_saved_places">My Saved Places</string>
+    <string name="my_saved_hotels">My Saved Hotels</string>
+    <string name="share_app">Share App</string>
+    <string name="logout">Logout</string>
+    <string name="logout_confirmation_alert">Are you sure you want to logout?</string>
 </resources>

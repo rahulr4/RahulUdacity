@@ -599,7 +599,7 @@ public class Utility {
      */
     public static void generateFBKeyHash(Context mContext) {
         try {
-            PackageInfo info = mContext.getPackageManager().getPackageInfo("com.app.serviceapp",
+            PackageInfo info = mContext.getPackageManager().getPackageInfo("com.rahul.udacity.cs2",
                     PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.kumulos.android.Kumulos;
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.utility.Utility;
@@ -31,6 +33,8 @@ public class ApplicationController extends Application implements Application.Ac
     public void onCreate() {
         super.onCreate();
         registerActivityLifecycleCallbacks(this);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
         Kumulos.initWithAPIKeyAndSecretKey("38b9a881-da7e-49d8-9344-949aa00322c8", "TuPtUiep+fOUfUEVpGpl7yjqDWlofe2FLOok", this);
 
         mInstance = this;

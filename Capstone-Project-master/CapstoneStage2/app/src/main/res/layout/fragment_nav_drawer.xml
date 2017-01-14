@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/username_tv"
+                fontPath="fonts/NeoSansPro-Medium.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:layout_marginRight="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_40"
+                android:padding="@dimen/margin_20"
+                android:text="@string/guest_user"
+                android:textColor="@color/blue_07a4cb"
+                android:textSize="@dimen/text_20" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/my_places_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_60"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:src="@drawable/ic_map_white_48dp"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin_18"
+                        android:layout_marginStart="@dimen/margin_18"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:text="@string/my_saved_places"
+                        android:textColor="@color/blue_07a4cb"
+                        android:textSize="@dimen/text_18" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/saved_hotels_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_60"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:src="@drawable/ic_hotel_white_48dp"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin_18"
+                        android:layout_marginStart="@dimen/margin_18"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:text="@string/my_saved_hotels"
+                        android:textColor="@color/blue_07a4cb"
+                        android:textSize="@dimen/text_18" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/restaurants_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_60"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:src="@drawable/ic_restaurant_white_48dp"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin_18"
+                        android:layout_marginStart="@dimen/margin_18"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:text="@string/my_saved_restaurants"
+                        android:textColor="@color/blue_07a4cb"
+                        android:textSize="@dimen/text_18" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/share_app_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_60"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:src="@drawable/ic_get_app_white_48dp"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin_18"
+                        android:layout_marginStart="@dimen/margin_18"
+                        android:layout_weight="0.9"
+                        android:gravity="center_vertical"
+                        android:text="@string/share_app"
+                        android:textColor="@color/blue_07a4cb"
+                        android:textSize="@dimen/text_18" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/logout_iv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_60"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_20"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/ic_exit_to_app_white_48dp"
+                    android:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/margin_18"
+                    android:layout_marginStart="@dimen/margin_18"
+                    android:layout_weight="0.9"
+                    android:gravity="center_vertical"
+                    android:text="@string/logout"
+                    android:textColor="@color/blue_07a4cb"
+                    android:textSize="@dimen/text_18" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

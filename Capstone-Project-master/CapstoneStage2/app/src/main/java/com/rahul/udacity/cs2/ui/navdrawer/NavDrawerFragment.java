@@ -27,6 +27,11 @@ public class NavDrawerFragment extends BaseFragment implements NavDrawerView, Vi
     @Override
     protected void initUi() {
         navDrawerPresenter = new NavDrawerPresenter(this);
+        findViewById(R.id.home).setOnClickListener(this);
+        findViewById(R.id.my_places_lv).setOnClickListener(this);
+        findViewById(R.id.saved_hotels_lv).setOnClickListener(this);
+        findViewById(R.id.restaurants_lv).setOnClickListener(this);
+
     }
 
     @Override
@@ -96,6 +101,11 @@ public class NavDrawerFragment extends BaseFragment implements NavDrawerView, Vi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.home:
+                drawerItemClicked = true;
+                mSelectedEnum = NavDrawerEnum.HOME;
+                mDrawerLayout.closeDrawers();
+                break;
             case R.id.my_places_lv:
                 drawerItemClicked = true;
                 mSelectedEnum = NavDrawerEnum.SAVED_PLACES;

@@ -52,11 +52,12 @@ public class SavedListFragment extends BaseFragment implements SavedListView {
         SavedListPresenter savedListPresenter = new SavedListPresenter(this);
 
         String mode = getArguments().getString(Constants.MODE, "");
+        showProgress(false);
         NavDrawerEnum navDrawerEnum = NavDrawerEnum.valueOf(mode);
         switch (navDrawerEnum) {
             case SAVED_PLACES:
 
-                if (db.getAllPlaces() != null) {
+                if (!db.getAllPlaces().isEmpty()) {
                     savedListPresenter.getPlaceDetail(db.getAllPlaces());
                 } else {
                     noDataTv.setVisibility(View.VISIBLE);
@@ -65,7 +66,7 @@ public class SavedListFragment extends BaseFragment implements SavedListView {
                 break;
             case SAVED_RESTAURANTS:
 
-                if (db.getAllRes().size() > 0) {
+                if (!db.getAllRes().isEmpty()) {
                     savedListPresenter.getPlaceDetail(db.getAllRes());
                 } else {
                     noDataTv.setVisibility(View.VISIBLE);
@@ -75,7 +76,7 @@ public class SavedListFragment extends BaseFragment implements SavedListView {
 
             case SAVED_HOTELS:
 
-                if (db.getAllHotels().size() > 0) {
+                if (!db.getAllHotels().isEmpty()) {
                     savedListPresenter.getPlaceDetail(db.getAllHotels());
                 } else {
                     noDataTv.setVisibility(View.VISIBLE);

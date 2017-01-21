@@ -11,6 +11,7 @@ import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.ApplicationController;
 import com.rahul.udacity.cs2.base.BaseActivity;
 import com.rahul.udacity.cs2.base.BaseFragment;
+import com.rahul.udacity.cs2.ui.restaurant_list.fragments.RestaurantsFragment;
 
 
 public class RestaurantListActivity extends BaseActivity {
@@ -18,7 +19,6 @@ public class RestaurantListActivity extends BaseActivity {
     ViewPager pager;
     ViewPagerAdapter adapter;
     CharSequence Titles[] = {"RESTAURANTS", "BAKERY", "COFFEE & TEA", "LIQUOR"};
-    private TabLayout tabLayout;
 
     @Override
     protected void onResume() {
@@ -36,7 +36,7 @@ public class RestaurantListActivity extends BaseActivity {
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(pager);
     }
 
@@ -57,24 +57,23 @@ public class RestaurantListActivity extends BaseActivity {
         //This method return the fragment for the every position in the View Pager
         @Override
         public BaseFragment getItem(int position) {
-            /*switch (position) {
+            switch (position) {
                 case 0:
-                    Restaurants restaurants = new Restaurants();
+                    RestaurantsFragment restaurants = new RestaurantsFragment();
                     return restaurants;
                 case 1:
-                    Bakery bakery = new Bakery();
+                    RestaurantsFragment bakery = new RestaurantsFragment();
                     return bakery;
                 case 2:
-                    Cafe cafe = new Cafe();
+                    RestaurantsFragment cafe = new RestaurantsFragment();
                     return cafe;
                 case 3:
-                    Liquor liquor = new Liquor();
+                    RestaurantsFragment liquor = new RestaurantsFragment();
                     return liquor;
 
                 default:
                     return null;
-            }*/
-            return null;
+            }
 
         }
 

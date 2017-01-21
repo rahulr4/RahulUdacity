@@ -2,9 +2,6 @@ package com.rahul.udacity.cs2.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Anirudh on 04/09/15.
- */
 public class PlaceListDetail {
 
     private String place_name, place_id;

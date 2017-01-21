@@ -31,6 +31,7 @@ import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.ApplicationController;
 import com.rahul.udacity.cs2.base.BaseActivity;
 import com.rahul.udacity.cs2.database.DatabaseSave;
+import com.rahul.udacity.cs2.ui.reviews.ReviewActivity;
 import com.rahul.udacity.cs2.utility.Constants;
 
 import org.json.JSONArray;
@@ -58,7 +59,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
     private static final String TAG_LAT = "lat";
     private static final String TAG_LNG = "lng";
 
-        DatabaseSave db;
+    DatabaseSave db;
     ImageView image, share;
     TextView place_name, place_vicinity, place_address, rating;
     LinearLayout call_now, website, timetable, saveLayout, reviews, photo_layout;
@@ -134,9 +135,9 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
         reviews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent i = new Intent(PlaceDetailActivity.this, ReviewActivity.class);
-                i.putExtra("place_id", place_id);
-                startActivity(i);*/
+                Intent i = new Intent(PlaceDetailActivity.this, ReviewActivity.class);
+                i.putExtra(Constants.PLACE_ID, place_id);
+                startActivity(i);
 
             }
         });

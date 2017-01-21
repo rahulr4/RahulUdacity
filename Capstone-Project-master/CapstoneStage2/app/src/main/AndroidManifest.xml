@@ -65,6 +65,11 @@
             android:name=".ui.place_detail.PlaceDetailActivity"
             android:screenOrientation="portrait" />
 
+
+        <activity
+            android:name=".ui.reviews.ReviewActivity"
+            android:label="@string/reviews"
+            android:screenOrientation="portrait" />
         <receiver
             android:name=".receivers.NetworkChangeReceiver"
             android:enabled="true"

@@ -12,9 +12,6 @@ import com.rahul.udacity.cs2.utility.Constants;
 
 import java.util.ArrayList;
 
-/**
- * Created by Anirudh on 06/09/15.
- */
 public class LiquorFragment extends BaseFragment implements RestaurantView {
 
     private RecyclerView recyclerView;

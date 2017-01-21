@@ -29,6 +29,7 @@ public class FlightDetailActivity extends BaseActivity implements FlightsDetailV
 
     @Override
     protected void initUi() {
+        setBackButtonEnabled();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         if (getIntent().getExtras() != null) {

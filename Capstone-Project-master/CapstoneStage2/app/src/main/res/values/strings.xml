@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="map_api_key">AIzaSyA7Zm_YdzIV2ZrvIBloUaS1QSG3aivr2Z8</string>
     <string name="api_key">AIzaSyA0z0ZLyaVAnlpfAFvH4jelw3k2yRDrKoI</string>
 
@@ -87,4 +87,7 @@
     <string name="tourist_places">Tourist Places</string>
     <string name="from">From</string>
     <string name="to">To</string>
+
+    <string name="price_flight">Rs. <xliff:g id="kilogram">%1$d</xliff:g></string>
+    <string name="flight_departure">Departure Terminal : <xliff:g id="kilogram">%1$s</xliff:g></string>
 </resources>

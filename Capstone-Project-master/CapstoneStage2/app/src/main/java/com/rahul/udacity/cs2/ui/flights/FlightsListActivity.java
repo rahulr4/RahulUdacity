@@ -18,9 +18,8 @@ import com.rahul.udacity.cs2.utility.Constants;
 
 public class FlightsListActivity extends BaseActivity {
 
-    RelativeLayout from, to, dateLayout;
+    RelativeLayout from, to;
     TextView fromname, toname;
-    static TextView date;
     Button search;
 
 

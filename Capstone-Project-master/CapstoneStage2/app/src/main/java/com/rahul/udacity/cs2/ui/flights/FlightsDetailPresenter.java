@@ -89,7 +89,7 @@ class FlightsDetailPresenter {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 flightsDetailView.showProgress(false);
-                Log.i("Volley Error", volleyError.getMessage());
+//                Log.i("Volley Error", volleyError.getMessage());
 
             }
         });

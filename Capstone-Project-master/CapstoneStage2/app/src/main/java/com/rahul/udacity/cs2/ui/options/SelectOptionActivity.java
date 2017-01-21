@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.BaseActivity;
+import com.rahul.udacity.cs2.ui.flights.FlightsListActivity;
 import com.rahul.udacity.cs2.ui.hotels.HotelListActivity;
 import com.rahul.udacity.cs2.ui.restaurant_list.RestaurantListActivity;
 import com.rahul.udacity.cs2.ui.tourist.TouristsActivity;
@@ -56,6 +57,7 @@ public class SelectOptionActivity extends BaseActivity implements SelectOptionVi
         restaurants.setOnClickListener(this);
         tourist.setOnClickListener(this);
         hotels.setOnClickListener(this);
+        flights.setOnClickListener(this);
         /*
 
         flights.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +85,10 @@ public class SelectOptionActivity extends BaseActivity implements SelectOptionVi
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
+            case R.id.flight:
+                Intent ir = new Intent(SelectOptionActivity.this, FlightsListActivity.class);
+                startActivity(ir);
+                break;
             case R.id.hotels:
                 Intent i2 = new Intent(SelectOptionActivity.this, HotelListActivity.class);
                 i2.putExtra(Constants.LATITUDE, selectOptionPresenter.getLat());

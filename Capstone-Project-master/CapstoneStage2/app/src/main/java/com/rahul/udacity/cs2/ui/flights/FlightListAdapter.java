@@ -66,11 +66,11 @@ class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.ViewHolde
     public void onBindViewHolder(FlightListAdapter.ViewHolder viewHolder, int i) {
 
         viewHolder.airline.setText(detailModelArrayList.get(i).getAirline());
-        viewHolder.price.setText("Rs. " + detailModelArrayList.get(i).getPrice() * 60);
+        viewHolder.price.setText(context.getString(R.string.price_flight, detailModelArrayList.get(i).getPrice() * 60));
         viewHolder.stime.setText(detailModelArrayList.get(i).getSTime());
         viewHolder.ttime.setText(detailModelArrayList.get(i).getTTime());
         viewHolder.flight.setText(detailModelArrayList.get(i).getFlight());
-        viewHolder.terminal.setText("Departure Terminal : " + detailModelArrayList.get(i).getSTerminal());
+        viewHolder.terminal.setText(context.getString(R.string.flight_departure, detailModelArrayList.get(i).getSTerminal()));
 
         viewHolder.flight_icon.setImageDrawable(getIcon(i));
 

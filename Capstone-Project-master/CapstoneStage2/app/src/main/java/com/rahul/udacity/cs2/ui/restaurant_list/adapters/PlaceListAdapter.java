@@ -21,12 +21,14 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.View
     private Context context;
     private LayoutInflater mInflater;
     private List<PlaceListDetail> list;
+    private int choice;
 
-    public PlaceListAdapter(Context c, List<PlaceListDetail> list) {
+    public PlaceListAdapter(Context c, List<PlaceListDetail> list, int choice) {
         this.context = c;
         this.list = list;
         mInflater = (LayoutInflater) c
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.choice = choice;
     }
 
     @Override
@@ -80,7 +82,7 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.View
         ImageView place_pic;
         RatingBar rating;
 
-        ViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
 
             place_address = (TextView) itemView.findViewById(R.id.place_Address);

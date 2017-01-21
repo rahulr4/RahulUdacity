@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by Anirudh on 06/09/15.
  */
-public class RestaurantsFragment extends BaseFragment implements RestaurantView {
+public class BakeryFragment extends BaseFragment implements RestaurantView {
 
     private RecyclerView recyclerView;
 
@@ -33,7 +33,7 @@ public class RestaurantsFragment extends BaseFragment implements RestaurantView 
 
         //url to get list of places
         String sb = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + "location=" + latitude + "," + longitude +
-                "&types=restaurant" +
+                "&types=bakery" +
                 "&radius=5000" +
                 "&rankby=prominence" +
                 "&key=" + getString(R.string.api_key);

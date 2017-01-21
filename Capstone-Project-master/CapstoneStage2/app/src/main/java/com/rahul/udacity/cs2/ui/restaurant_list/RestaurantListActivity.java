@@ -11,6 +11,9 @@ import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.ApplicationController;
 import com.rahul.udacity.cs2.base.BaseActivity;
 import com.rahul.udacity.cs2.base.BaseFragment;
+import com.rahul.udacity.cs2.ui.restaurant_list.fragments.BakeryFragment;
+import com.rahul.udacity.cs2.ui.restaurant_list.fragments.CafeFragment;
+import com.rahul.udacity.cs2.ui.restaurant_list.fragments.LiquorFragment;
 import com.rahul.udacity.cs2.ui.restaurant_list.fragments.RestaurantsFragment;
 
 
@@ -62,13 +65,13 @@ public class RestaurantListActivity extends BaseActivity {
                     RestaurantsFragment restaurants = new RestaurantsFragment();
                     return restaurants;
                 case 1:
-                    RestaurantsFragment bakery = new RestaurantsFragment();
+                    BakeryFragment bakery = new BakeryFragment();
                     return bakery;
                 case 2:
-                    RestaurantsFragment cafe = new RestaurantsFragment();
+                    CafeFragment cafe = new CafeFragment();
                     return cafe;
                 case 3:
-                    RestaurantsFragment liquor = new RestaurantsFragment();
+                    LiquorFragment liquor = new LiquorFragment();
                     return liquor;
 
                 default:

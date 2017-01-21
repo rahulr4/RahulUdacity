@@ -81,6 +81,21 @@
             android:label="@string/tourist_places"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.hotels.HotelListActivity"
+            android:label="@string/hotels"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.flights.FlightsListActivity"
+            android:label="@string/flights"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".ui.flights.FlightDetailActivity"
+            android:label="@string/flights"
+            android:screenOrientation="portrait" />
 
 
         <receiver

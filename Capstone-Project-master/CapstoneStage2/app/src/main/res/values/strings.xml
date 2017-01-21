@@ -85,4 +85,6 @@
     <string name="time">TIME</string>
     <string name="tourist">Tourists</string>
     <string name="tourist_places">Tourist Places</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
 </resources>

@@ -30,6 +30,7 @@ public class ReviewActivity extends BaseActivity implements ReviewsView {
 
     @Override
     protected void initUi() {
+        setBackButtonEnabled();
         reviewPresenter = new ReviewPresenter(this);
         listView = (ListView) findViewById(R.id.list);
         place_id = getIntent().getStringExtra(Constants.PLACE_ID);
@@ -56,6 +57,7 @@ public class ReviewActivity extends BaseActivity implements ReviewsView {
 
     @Override
     public void setData(ArrayList<ReviewModel> reviewModelArrayList) {
+        showProgress(false);
         ReviewAdapter adapter = new ReviewAdapter(this, reviewModelArrayList);
         listView.setAdapter(adapter);
     }

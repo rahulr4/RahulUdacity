@@ -35,14 +35,6 @@
                         android:scaleType="centerCrop"
                         app:layout_collapseMode="parallax" />
 
-                    <ImageView
-                        android:id="@+id/share"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_share_white" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

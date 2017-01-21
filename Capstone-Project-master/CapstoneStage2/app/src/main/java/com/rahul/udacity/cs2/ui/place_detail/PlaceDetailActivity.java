@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.rahul.udacity.cs2.R.id.share;
+
 public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallback, PlaceDetailView {
     private String phone_number, place_website;
     private static final String TAG_RESULT = "result";
@@ -56,7 +60,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
     private static final String TAG_LNG = "lng";
     private ArrayList<String> photos_references = new ArrayList<>();
     DatabaseSave db;
-    ImageView image, share;
+    ImageView image;
     TextView place_name, place_vicinity, place_address, rating;
     LinearLayout call_now, website, timetable, saveLayout, reviews, photo_layout;
     SupportMapFragment fm;
@@ -94,7 +98,6 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             String photo = photos_references.get(i);
             img.setLayoutParams(params);
-            Log.d("reference", photos_references.get(i));
 
             Glide.with(PlaceDetailActivity.this).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference="
                     + photo + "&key=" + getString(R.string.api_key))
@@ -116,9 +119,32 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
         placeDetailPresenter = new PlaceDetailPresenter(this);
         db = new DatabaseSave(this);
 
+        getHeaderToolBar().inflateMenu(R.menu.menu_place_detail);
+        getHeaderToolBar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.share:
+                        try {
+                            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                            sharingIntent.setType("text/plain");
+                            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+                                    "Download traveladvisor to help plan your trips perfectly.");
+                            startActivity(Intent.createChooser(sharingIntent,
+                                    "Share using"));
+                        } catch (Exception e) {
+                            Log.i("Error", e.getMessage());
+                            Utility.showSnackBar(getActivity(), "No activity found to open website");
+
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
+
         image = (ImageView) findViewById(R.id.imagePosterFull);
         saveImage = (ImageView) findViewById(R.id.saveImage);
-        share = (ImageView) findViewById(R.id.share);
         place_name = (TextView) findViewById(R.id.place_name);
         place_vicinity = (TextView) findViewById(R.id.place_vicinity);
         place_address = (TextView) findViewById(R.id.address);
@@ -162,9 +188,13 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
         website.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(website + ""));
-                startActivity(intent);
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(place_website + ""));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Utility.showSnackBar(getActivity(), "No activity found to open website");
+                }
             }
         });
 
@@ -236,12 +266,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
             @Override
             public void onClick(View view) {
 
-                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-                        "Download traveladvisor to help plan your trips perfectly.");
-                startActivity(Intent.createChooser(sharingIntent,
-                        "Share using"));
+
             }
         });
     }
@@ -302,7 +327,15 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
             lat = Double.parseDouble(location.getString(TAG_LAT));
             lng = Double.parseDouble(location.getString(TAG_LNG));
 
-            double rate = list.getDouble(TAG_TOTAL_RATING);
+            double rate = 0;
+            try {
+                if (list.has(TAG_TOTAL_RATING))
+                    rate = list.getDouble(TAG_TOTAL_RATING);
+                else
+                    rate = list.getDouble("rating");
+            } catch (Exception e) {
+                Log.i("Error", e.getMessage());
+            }
             rating.setText(rate + " user ratings");
 
             if (list.has(TAG_OPENING_HOURS)) {

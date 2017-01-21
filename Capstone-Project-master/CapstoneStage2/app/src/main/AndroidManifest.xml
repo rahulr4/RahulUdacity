@@ -70,6 +70,7 @@
             android:name=".ui.reviews.ReviewActivity"
             android:label="@string/reviews"
             android:screenOrientation="portrait" />
+
         <receiver
             android:name=".receivers.NetworkChangeReceiver"
             android:enabled="true"
@@ -90,7 +91,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api_key" />
-
     </application>
 
 </manifest>

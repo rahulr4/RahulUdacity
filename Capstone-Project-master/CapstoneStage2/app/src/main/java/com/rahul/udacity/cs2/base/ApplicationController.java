@@ -11,6 +11,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 import com.kumulos.android.Kumulos;
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.utility.Utility;
@@ -123,5 +125,21 @@ public class ApplicationController extends MultiDexApplication implements Applic
             mRequestQueue.cancelAll(tag);
         }
     }
+
+    public enum TrackerName {
+        APP_TRACKER, GLOBAL_TRACKER, ECOMMERCE_TRACKER,
+    }
+
+    private Tracker mTracker;
+
+    synchronized public Tracker getTracker() {
+        if (mTracker == null) {
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+            mTracker = analytics.newTracker("UA-90693327-1");
+        }
+        return mTracker;
+    }
+
 }
 

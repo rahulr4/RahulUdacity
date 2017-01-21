@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "491945119649",
+    "project_id": "capstone-1484978097438"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491945119649:android:25fc7dd3ff364aca",
+        "android_client_info": {
+          "package_name": "com.rahul.udacity.cs2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0z0ZLyaVAnlpfAFvH4jelw3k2yRDrKoI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-39698713-3"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

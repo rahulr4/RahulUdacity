@@ -1,6 +1,7 @@
 package com.rahul.udacity.cs2.ui.options;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -9,11 +10,9 @@ import android.widget.TextView;
 
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.BaseActivity;
+import com.rahul.udacity.cs2.ui.restaurant_list.RestaurantListActivity;
 import com.rahul.udacity.cs2.utility.Constants;
 
-/**
- * Created by Anirudh on 04/09/15.
- */
 public class SelectOptionActivity extends BaseActivity implements SelectOptionView {
 
     String placeid;
@@ -22,6 +21,7 @@ public class SelectOptionActivity extends BaseActivity implements SelectOptionVi
     FrameLayout frameLayout;
     ImageView back;
     TextView cityname;
+    private SelectOptionPresenter selectOptionPresenter;
 
     @Override
     protected void initUi() {
@@ -48,7 +48,7 @@ public class SelectOptionActivity extends BaseActivity implements SelectOptionVi
         }
 
         url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeid + "&key=" + getString(R.string.api_key);
-        SelectOptionPresenter selectOptionPresenter = new SelectOptionPresenter(this);
+        selectOptionPresenter = new SelectOptionPresenter(this);
         selectOptionPresenter.getPlaceDetail(url);
 
         restaurants.setOnClickListener(this);
@@ -112,6 +112,10 @@ public class SelectOptionActivity extends BaseActivity implements SelectOptionVi
         super.onClick(view);
         switch (view.getId()) {
             case R.id.restaurants:
+                Intent i = new Intent(SelectOptionActivity.this, RestaurantListActivity.class);
+                i.putExtra(Constants.LATITUDE, selectOptionPresenter.getLat());
+                i.putExtra(Constants.LONGTITUDE, selectOptionPresenter.getLng());
+                startActivity(i);
                 break;
         }
     }

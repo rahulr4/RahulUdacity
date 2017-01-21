@@ -47,7 +47,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                     onHeaderBackClicked();
                 }
             });
-//            setSupportActionBar(headerToolBar);// Set the padding to match the Status Bar height
         }
 
         titleTv = (TextView) findViewById(R.id.title_tv);

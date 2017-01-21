@@ -16,4 +16,6 @@ public class Constants {
     public static final String NAME = "name";
 
 
+    public static final String LATITUDE = "lat";
+    public static final String LONGTITUDE = "long";
 }

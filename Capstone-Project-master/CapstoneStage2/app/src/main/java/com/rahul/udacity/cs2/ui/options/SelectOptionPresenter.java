@@ -62,4 +62,11 @@ class SelectOptionPresenter {
         ApplicationController.getApplicationInstance().addToRequestQueue(movieReq);
     }
 
+    public Double getLat() {
+        return lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
 }

@@ -51,6 +51,12 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
+            android:name=".ui.restaurant_list.RestaurantListActivity"
+            android:label="@string/restaurants"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
             android:name=".ui.options.SelectOptionActivity"
             android:screenOrientation="portrait" />
 

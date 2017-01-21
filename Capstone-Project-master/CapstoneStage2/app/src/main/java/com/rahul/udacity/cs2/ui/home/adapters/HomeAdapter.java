@@ -1,5 +1,6 @@
 package com.rahul.udacity.cs2.ui.home.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.model.HomeModel;
+import com.rahul.udacity.cs2.ui.options.SelectOptionActivity;
+import com.rahul.udacity.cs2.utility.Constants;
 
 import java.util.ArrayList;
 
@@ -39,13 +42,24 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         holder.textView.setText(placesArrayList.get(position).getName());
     }
 
-    static class HomeViewHolder extends RecyclerView.ViewHolder {
+    class HomeViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
 
-        HomeViewHolder(View itemView) {
+        HomeViewHolder(final View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.text1);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    final HomeModel item = placesArrayList.get(getAdapterPosition());
+                    Intent i1 = new Intent(itemView.getContext(), SelectOptionActivity.class);
+                    i1.putExtra(Constants.PLACE_ID, item.getKey());
+                    i1.putExtra(Constants.NAME, item.getName());
+                    itemView.getContext().startActivity(i1);
+                }
+            });
         }
     }
 }

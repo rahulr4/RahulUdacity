@@ -27,9 +27,6 @@ import java.util.ArrayList;
  */
 
 public class HomeFragment extends BaseFragment implements HomeView {
-    private String TAG = HomeFragment.class.getSimpleName();
-    private HomePresenter homePresenter;
-    private AutoCompleteTextView searchAutoCompleteTv;
 
     private static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
@@ -37,14 +34,14 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     protected void initUi() {
-        homePresenter = new HomePresenter(this);
+        HomePresenter homePresenter = new HomePresenter(this);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.places_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         ArrayList<HomeModel> homePresenterList = homePresenter.createList();
         recyclerView.setAdapter(new HomeAdapter(homePresenterList));
 
-        searchAutoCompleteTv = (AutoCompleteTextView) findViewById(R.id.search_auto_tv);
+        AutoCompleteTextView searchAutoCompleteTv = (AutoCompleteTextView) findViewById(R.id.search_auto_tv);
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(Places.GEO_DATA_API)

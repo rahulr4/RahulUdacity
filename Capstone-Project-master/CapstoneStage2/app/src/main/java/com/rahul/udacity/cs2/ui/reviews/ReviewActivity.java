@@ -52,7 +52,7 @@ public class ReviewActivity extends BaseActivity implements ReviewsView {
 
     @Override
     public void showProgress(boolean showProgress) {
-        showProgressDialog(showProgress);
+        showProgressBar(showProgress);
     }
 
     @Override

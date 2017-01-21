@@ -39,8 +39,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.rahul.udacity.cs2.R.id.share;
-
 public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallback, PlaceDetailView {
     private String phone_number, place_website;
     private static final String TAG_RESULT = "result";
@@ -262,13 +260,41 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
             }
         });
 
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        switch (choice) {
+            case 1:
+                if (db.getPlaces(place_id)) {
+                    saveImage.setImageResource(R.drawable.favourite_icon_red);
+                    saveText.setText("SAVED");
+                    saveText.setTextColor(Color.RED);
+                }
+                break;
 
+            case 2:
+                if (db.gethotel(place_id)) {
+                    saveImage.setImageResource(R.drawable.favourite_icon_red);
+                    saveText.setText("SAVED");
+                    saveText.setTextColor(Color.RED);
+                }
+                break;
 
-            }
-        });
+            case 3:
+
+                if (db.getRes(place_id)) {
+                    saveImage.setImageResource(R.drawable.favourite_icon_red);
+                    saveText.setText("SAVED");
+                    saveText.setTextColor(Color.RED);
+                }
+                break;
+
+            case 4:
+                if (db.getPlaces(place_id)) {
+                    saveImage.setImageResource(R.drawable.favourite_icon_red);
+                    saveText.setText("SAVED");
+                    saveText.setTextColor(Color.RED);
+                }
+                break;
+        }
+
     }
 
     @Override

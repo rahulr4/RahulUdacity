@@ -56,6 +56,12 @@ public class HomeActivity extends BaseActivity implements HomeView {
 
     @Override
     public void onNavigationDrawerItemSelected(NavDrawerEnum navDrawerEnum) {
+        switch (navDrawerEnum) {
+            case HOME:
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment(),
+                        HomeFragment.class.getSimpleName())
+                        .commitAllowingStateLoss();
+        }
     }
 
     private void showConfirmationDialog() {

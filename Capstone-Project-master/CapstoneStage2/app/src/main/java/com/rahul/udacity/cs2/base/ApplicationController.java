@@ -3,6 +3,7 @@ package com.rahul.udacity.cs2.base;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.support.multidex.MultiDexApplication;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -16,7 +17,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  * Created by rahulgupta on 08/11/16.
  */
 
-public class ApplicationController extends Application implements Application.ActivityLifecycleCallbacks {
+public class ApplicationController extends MultiDexApplication implements Application.ActivityLifecycleCallbacks {
     private static ApplicationController mInstance;
     private boolean mIsNetworkConnected;
     private Activity currentActivity;

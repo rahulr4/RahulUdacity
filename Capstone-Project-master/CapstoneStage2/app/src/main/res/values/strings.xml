@@ -63,4 +63,6 @@
     <string name="share_app">Share App</string>
     <string name="logout">Logout</string>
     <string name="logout_confirmation_alert">Are you sure you want to logout?</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
 </resources>

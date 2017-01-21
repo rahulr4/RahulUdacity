@@ -12,6 +12,7 @@ import com.facebook.CallbackManager;
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.BaseActivity;
 import com.rahul.udacity.cs2.model.RequestBean;
+import com.rahul.udacity.cs2.ui.home.HomeActivity;
 import com.rahul.udacity.cs2.utility.Constants;
 import com.rahul.udacity.cs2.utility.Utility;
 
@@ -91,10 +92,10 @@ public class LoginActivity extends BaseActivity implements LoginView, FbCallback
         Utility.putStringValueInSharedPreference(getActivity(), Constants.PREFS_USER_NAME, (String) linkedHashMap.get("username"));
         Utility.putStringValueInSharedPreference(getActivity(), Constants.PREFS_PASSWORD, (String) linkedHashMap.get("password"));
 
-        /*Intent intent = new Intent(getActivity(), HomeActivity.class);
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     @Override

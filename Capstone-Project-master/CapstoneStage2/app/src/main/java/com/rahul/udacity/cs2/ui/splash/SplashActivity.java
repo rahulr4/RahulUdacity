@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.BaseActivity;
+import com.rahul.udacity.cs2.ui.home.HomeActivity;
 import com.rahul.udacity.cs2.ui.login.LoginActivity;
 import com.rahul.udacity.cs2.utility.Utility;
 
@@ -36,9 +37,9 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Override
     public void navigateHome() {
-        /*Intent intent = new Intent(getActivity(), HomeActivity.class);
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
-        finish();*/
+        finish();
     }
 
     @Override

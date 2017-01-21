@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 import android.support.multidex.MultiDexApplication;
+import android.text.TextUtils;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.kumulos.android.Kumulos;
@@ -18,9 +22,11 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  */
 
 public class ApplicationController extends MultiDexApplication implements Application.ActivityLifecycleCallbacks {
+    private static final String TAG = ApplicationController.class.getSimpleName();
     private static ApplicationController mInstance;
     private boolean mIsNetworkConnected;
     private Activity currentActivity;
+    private RequestQueue mRequestQueue;
 
     public Activity getCurrentActivity() {
         return currentActivity;
@@ -90,6 +96,32 @@ public class ApplicationController extends MultiDexApplication implements Applic
     @Override
     public void onActivityDestroyed(Activity activity) {
 
+    }
+
+    public RequestQueue getRequestQueue() {
+        if (mRequestQueue == null) {
+            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+        }
+
+        return mRequestQueue;
+    }
+
+
+    public <T> void addToRequestQueue(Request<T> req, String tag) {
+        // set the default tag if tag is empty
+        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+        getRequestQueue().add(req);
+    }
+
+    public <T> void addToRequestQueue(Request<T> req) {
+        req.setTag(TAG);
+        getRequestQueue().add(req);
+    }
+
+    public void cancelPendingRequests(Object tag) {
+        if (mRequestQueue != null) {
+            mRequestQueue.cancelAll(tag);
+        }
     }
 }
 

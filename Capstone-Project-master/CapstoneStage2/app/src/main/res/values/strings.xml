@@ -1,4 +1,6 @@
 <resources>
+    <string name="api_key">AIzaSyA7Zm_YdzIV2ZrvIBloUaS1QSG3aivr2Z8</string>
+
     <string name="facebook_app_id">623432824524593</string>
     <string name="app_name">Simply Travel</string>
     <string name="username">Username</string>
@@ -65,4 +67,9 @@
     <string name="logout_confirmation_alert">Are you sure you want to logout?</string>
     <string name="search">Search</string>
     <string name="home">Home</string>
+    <string name="tourist_attractions">Tourist Attractions</string>
+    <string name="hotels">Hotels</string>
+    <string name="food_court">Food Court</string>
+    <string name="shopping">Shopping</string>
+    <string name="flights">Flights</string>
 </resources>

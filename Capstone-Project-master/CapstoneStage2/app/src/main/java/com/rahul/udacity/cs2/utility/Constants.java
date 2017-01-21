@@ -11,4 +11,9 @@ public class Constants {
     public static final String PREFS_USER_NAME = "prefs_user_name";
     public static final String PREFS_PASSWORD = "prefs_password";
     //Preferences ==================================================================================
+
+    public static final String PLACE_ID = "placeid";
+    public static final String NAME = "name";
+
+
 }

@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.BaseFragment;
+import com.rahul.udacity.cs2.database.DatabaseSave;
 import com.rahul.udacity.cs2.ui.home.HomeView;
 import com.rahul.udacity.cs2.ui.home.NavDrawerEnum;
 import com.rahul.udacity.cs2.ui.login.LoginActivity;
@@ -80,7 +81,8 @@ public class NavDrawerFragment extends BaseFragment implements NavDrawerView, Vi
 
     @Override
     public void doLogout() {
-//        DatabaseHelper.getDatabaseHelperInstance(getActivity()).clearDatabase();
+        DatabaseSave databaseSave = new DatabaseSave(getActivity());
+        databaseSave.clearDatabase();
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_NEW_TASK
@@ -105,7 +107,7 @@ public class NavDrawerFragment extends BaseFragment implements NavDrawerView, Vi
                 mDrawerLayout.closeDrawers();
             case R.id.restaurants_lv:
                 drawerItemClicked = true;
-                mSelectedEnum = NavDrawerEnum.SAVED_RESTAURENTS;
+                mSelectedEnum = NavDrawerEnum.SAVED_RESTAURANTS;
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.share_app_lv:

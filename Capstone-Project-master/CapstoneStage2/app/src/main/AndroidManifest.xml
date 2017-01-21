@@ -97,6 +97,10 @@
             android:label="@string/flights"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.shopping.ShoppingActivity"
+            android:label="@string/shopping"
+            android:screenOrientation="portrait" />
 
         <receiver
             android:name=".receivers.NetworkChangeReceiver"

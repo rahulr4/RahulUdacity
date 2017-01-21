@@ -22,8 +22,10 @@ public class Constants {
     public static final int TYPE_PLACES = 1;
     public static final int TYPE_HOTELS = 2;
     public static final int TYPE_RESTAURANTS = 3;
+    public static final int TYPE_SHOPPING = 4;
     public static final String CHOICE = "choice";
 
     public static final String FROM = "from";
     public static final String TO = "to";
+    public static final String MODE = "mode";
 }

@@ -202,4 +202,11 @@ public class DatabaseSave extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
         return cursor;
     }
+
+    public void clearDatabase() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(TABLE_HOTELS, null, null);
+        db.delete(TABLE_PLACES, null, null);
+        db.delete(TABLE_RESTAURANTS, null, null);
+    }
 }

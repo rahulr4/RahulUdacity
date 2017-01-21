@@ -78,6 +78,7 @@ public class FlightsListActivity extends BaseActivity {
 
     @Override
     protected void initUi() {
+        setBackButtonEnabled();
         from = (RelativeLayout) findViewById(R.id.from);
         to = (RelativeLayout) findViewById(R.id.to);
         fromname = (TextView) findViewById(R.id.fromName);

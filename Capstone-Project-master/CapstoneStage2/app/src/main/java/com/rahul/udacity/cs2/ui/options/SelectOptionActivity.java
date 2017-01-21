@@ -13,6 +13,7 @@ import com.rahul.udacity.cs2.base.BaseActivity;
 import com.rahul.udacity.cs2.ui.flights.FlightsListActivity;
 import com.rahul.udacity.cs2.ui.hotels.HotelListActivity;
 import com.rahul.udacity.cs2.ui.restaurant_list.RestaurantListActivity;
+import com.rahul.udacity.cs2.ui.shopping.ShoppingActivity;
 import com.rahul.udacity.cs2.ui.tourist.TouristsActivity;
 import com.rahul.udacity.cs2.utility.Constants;
 
@@ -58,16 +59,9 @@ public class SelectOptionActivity extends BaseActivity implements SelectOptionVi
         tourist.setOnClickListener(this);
         hotels.setOnClickListener(this);
         flights.setOnClickListener(this);
+        shopping.setOnClickListener(this);
         /*
 
-        flights.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(SelectOptionActivity.this, FlightActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
-            }
-        });
 
         shopping.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +79,12 @@ public class SelectOptionActivity extends BaseActivity implements SelectOptionVi
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
+            case R.id.shopping:
+                Intent i5 = new Intent(SelectOptionActivity.this, ShoppingActivity.class);
+                i5.putExtra(Constants.LATITUDE, selectOptionPresenter.getLat());
+                i5.putExtra(Constants.LONGTITUDE, selectOptionPresenter.getLng());
+                startActivity(i5);
+                break;
             case R.id.flight:
                 Intent ir = new Intent(SelectOptionActivity.this, FlightsListActivity.class);
                 startActivity(ir);

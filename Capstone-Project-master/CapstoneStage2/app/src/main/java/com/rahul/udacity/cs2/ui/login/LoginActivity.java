@@ -118,12 +118,19 @@ public class LoginActivity extends BaseActivity implements LoginView, FbCallback
 
     @Override
     public void onLoginSuccess(FBBean beanObject) {
+        Utility.putBooleanValueInSharedPreference(getActivity(), Constants.PREFS_LOGGED_IN, true);
+        Utility.putStringValueInSharedPreference(getActivity(), Constants.PREFS_USER_NAME, beanObject.getFirstName() + " " + beanObject.getLastName());
+        Utility.putStringValueInSharedPreference(getActivity(), Constants.PREFS_PASSWORD, "");
 
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 
     @Override
     public void onLoginFailure(String message) {
-
+        Utility.showSnackBar(getActivity(), "Facebook Login Failed :- " + message);
     }
 
     @Override

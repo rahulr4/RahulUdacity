@@ -1,7 +1,6 @@
 package com.rahul.udacity.cs2.ui.flights;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,7 +13,7 @@ import com.google.android.gms.analytics.Tracker;
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.ApplicationController;
 import com.rahul.udacity.cs2.base.BaseActivity;
-import com.rahul.udacity.cs2.utility.Constants;
+import com.rahul.udacity.cs2.utility.Utility;
 
 public class FlightsListActivity extends BaseActivity {
 
@@ -103,13 +102,20 @@ public class FlightsListActivity extends BaseActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Utility.showAlertDialog(getActivity(), "Under Construction");
+
+/*
                 Intent i = new Intent(getActivity(), FlightDetailActivity.class);
                 i.putExtra(Constants.FROM, fromname.getText());
                 i.putExtra(Constants.TO, toname.getText());
                 startActivity(i);
+                */
 
             }
         });
+        Utility.showAlertDialog(getActivity(), "Under Construction");
+
+        //TODO Flight Api Pending from Provider
     }
 
     @Override

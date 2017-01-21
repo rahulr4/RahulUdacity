@@ -1,8 +1,6 @@
 package com.rahul.udacity.cs2.base;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -23,7 +21,6 @@ public abstract class BaseFragment extends Fragment {
     private MaterialProgressDialog mMaterialProgressDialog;
     protected Snackbar mSnackBar;
     protected ImageView mMaterialProgressBar;
-    protected ViewDataBinding viewDataBinding;
 
     @Override
     public void onDetach() {
@@ -41,11 +38,7 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutById(), container, false);
-        if (viewDataBinding != null)
-            return viewDataBinding.getRoot();
-        else
-            return inflater.inflate(getLayoutById(), container, false);
+        return inflater.inflate(getLayoutById(), container, false);
     }
 
     @Override

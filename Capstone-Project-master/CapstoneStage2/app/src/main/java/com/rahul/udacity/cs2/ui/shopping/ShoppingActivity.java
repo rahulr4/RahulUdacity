@@ -33,6 +33,7 @@ public class ShoppingActivity extends BaseActivity implements ShoppingView {
 
     @Override
     protected void initUi() {
+        setBackButtonEnabled();
         AdView mAdView1 = (AdView) findViewById(R.id.adView1);
 
         AdRequest adRequest = new AdRequest.Builder().addTestDevice("EAA80D31926665B9575A0981DE305DB8")

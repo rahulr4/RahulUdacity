@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.BaseFragment;
@@ -13,7 +15,10 @@ import com.rahul.udacity.cs2.database.DatabaseSave;
 import com.rahul.udacity.cs2.ui.home.HomeView;
 import com.rahul.udacity.cs2.ui.home.NavDrawerEnum;
 import com.rahul.udacity.cs2.ui.login.LoginActivity;
+import com.rahul.udacity.cs2.utility.Constants;
 import com.rahul.udacity.cs2.utility.Utility;
+
+import static com.rahul.udacity.cs2.R.id.share_app_lv;
 
 public class NavDrawerFragment extends BaseFragment implements NavDrawerView, View.OnClickListener {
     private DrawerLayout mDrawerLayout;
@@ -27,11 +32,21 @@ public class NavDrawerFragment extends BaseFragment implements NavDrawerView, Vi
     @Override
     protected void initUi() {
         navDrawerPresenter = new NavDrawerPresenter(this);
+        TextView usernameTv = (TextView) findViewById(R.id.username_tv);
+
+        String userName = Utility.getStringSharedPreference(mContext, Constants.PREFS_USER_NAME);
+        if (TextUtils.isEmpty(userName)) {
+            usernameTv.setText(R.string.guest_user);
+        } else {
+            usernameTv.setText(userName);
+        }
+
         findViewById(R.id.home).setOnClickListener(this);
         findViewById(R.id.my_places_lv).setOnClickListener(this);
         findViewById(R.id.saved_hotels_lv).setOnClickListener(this);
         findViewById(R.id.restaurants_lv).setOnClickListener(this);
-
+        findViewById(R.id.logout_iv).setOnClickListener(this);
+        findViewById(R.id.share_app_lv).setOnClickListener(this);
     }
 
     @Override
@@ -115,12 +130,13 @@ public class NavDrawerFragment extends BaseFragment implements NavDrawerView, Vi
                 drawerItemClicked = true;
                 mSelectedEnum = NavDrawerEnum.SAVED_HOTELS;
                 mDrawerLayout.closeDrawers();
+                break;
             case R.id.restaurants_lv:
                 drawerItemClicked = true;
                 mSelectedEnum = NavDrawerEnum.SAVED_RESTAURANTS;
                 mDrawerLayout.closeDrawers();
                 break;
-            case R.id.share_app_lv:
+            case share_app_lv:
                 drawerItemClicked = true;
                 mSelectedEnum = NavDrawerEnum.SHARE_APP;
                 mDrawerLayout.closeDrawers();

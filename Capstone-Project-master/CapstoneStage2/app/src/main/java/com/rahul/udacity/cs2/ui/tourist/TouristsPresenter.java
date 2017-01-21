@@ -1,4 +1,4 @@
-package com.rahul.udacity.cs2.ui.restaurant_list.fragments;
+package com.rahul.udacity.cs2.ui.tourist;
 
 import android.util.Log;
 
@@ -12,12 +12,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rahulgupta on 21/01/17.
  */
-public class RestaurantPresenter {
-    private final RestaurantView selectOptionView;
+
+class TouristsPresenter {
+    private List<PlaceListDetail> placeListDetailList = new ArrayList<>();
     private static final String TAG_RESULT = "results";
     private static final String TAG_ICON = "icon";
     private static final String TAG_NAME = "name";
@@ -26,20 +28,22 @@ public class RestaurantPresenter {
     private static final String TAG_ADDRESS = "vicinity";
     private static final String TAG_PHOTOS = "photos";
     private static final String TAG_PHOTOS_REFERENCE = "photo_reference";
+    private TouristsView touristsView;
 
-    public RestaurantPresenter(RestaurantView selectOptionView) {
-        this.selectOptionView = selectOptionView;
+    TouristsPresenter(TouristsView touristsView) {
+        this.touristsView = touristsView;
     }
 
     public void getPlaceList(String url) {
-        selectOptionView.showProgress(true);
+        touristsView.showProgress(true);
         Log.i("Volley Url", url);
+
         JsonObjectRequest placeReq = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                selectOptionView.showProgress(false);
-                ArrayList<PlaceListDetail> placeListDetailArrayList = new ArrayList<>();
+                touristsView.showProgress(false);
                 Log.i("Volley Response", jsonObject.toString());
+
                 try {
                     JSONArray list = jsonObject.getJSONArray(TAG_RESULT);
                     for (int i = 0; i < list.length(); i++) {
@@ -51,6 +55,7 @@ public class RestaurantPresenter {
                         placeListDetail.setIcon_url(m.getString(TAG_ICON));
                         placeListDetail.setPlace_address(m.getString(TAG_ADDRESS));
                         placeListDetail.setPlace_name(m.getString(TAG_NAME));
+
                         if (m.has(TAG_RATING)) {
                             placeListDetail.setPlace_rating(m.getDouble(TAG_RATING));
                         }
@@ -70,19 +75,20 @@ public class RestaurantPresenter {
                             }
                         }
 
-                        placeListDetailArrayList.add(placeListDetail);
+                        placeListDetailList.add(placeListDetail);
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                selectOptionView.setData(placeListDetailArrayList);
+                touristsView.setData(placeListDetailList);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                touristsView.showProgress(false);
                 Log.i("Volley Error", volleyError.getMessage());
-                selectOptionView.showProgress(false);
+
             }
         });
 

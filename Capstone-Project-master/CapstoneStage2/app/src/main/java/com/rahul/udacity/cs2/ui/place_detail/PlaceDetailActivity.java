@@ -210,7 +210,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
             @Override
             public void onClick(View view) {
                 switch (choice) {
-                    case 1:
+                    case Constants.TYPE_PLACES:
 
                         if (!db.getPlaces(place_id)) {
                             saveImage.setImageResource(R.drawable.favourite_icon_red);
@@ -222,7 +222,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                         }
                         break;
 
-                    case 2:
+                    case Constants.TYPE_HOTELS:
 
                         if (!db.gethotel(place_id)) {
                             saveImage.setImageResource(R.drawable.favourite_icon_red);
@@ -234,7 +234,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                         }
                         break;
 
-                    case 3:
+                    case Constants.TYPE_RESTAURANTS:
 
                         if (!db.getRes(place_id)) {
                             saveImage.setImageResource(R.drawable.favourite_icon_red);

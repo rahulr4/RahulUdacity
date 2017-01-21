@@ -2,6 +2,8 @@
     <string name="map_api_key">AIzaSyA7Zm_YdzIV2ZrvIBloUaS1QSG3aivr2Z8</string>
     <string name="api_key">AIzaSyA0z0ZLyaVAnlpfAFvH4jelw3k2yRDrKoI</string>
 
+    <string name="ads">ca-app-pub-3494460995981597/8313439693</string>
+
     <string name="facebook_app_id">623432824524593</string>
     <string name="app_name">Simply Travel</string>
     <string name="username">Username</string>
@@ -81,4 +83,6 @@
     <string name="address">ADDRESS</string>
     <string name="photo">PHOTOS</string>
     <string name="time">TIME</string>
+    <string name="tourist">Tourists</string>
+    <string name="tourist_places">Tourist Places</string>
 </resources>

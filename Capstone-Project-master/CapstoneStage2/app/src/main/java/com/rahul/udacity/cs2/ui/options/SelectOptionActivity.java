@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.BaseActivity;
 import com.rahul.udacity.cs2.ui.restaurant_list.RestaurantListActivity;
+import com.rahul.udacity.cs2.ui.tourist.TouristsActivity;
 import com.rahul.udacity.cs2.utility.Constants;
 
 public class SelectOptionActivity extends BaseActivity implements SelectOptionView {
@@ -52,25 +53,13 @@ public class SelectOptionActivity extends BaseActivity implements SelectOptionVi
         selectOptionPresenter.getPlaceDetail(url);
 
         restaurants.setOnClickListener(this);
-        /*restaurants.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(SelectOptionActivity.this, RestaurantListActivity.class);
-                i.putExtra("lat", lat);
-                i.putExtra("lng", lng);
-                startActivity(i);
-                overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
-
-            }
-        });
+        tourist.setOnClickListener(this);
+        /*
 
         tourist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SelectOptionActivity.this, TouristMainActivity.class);
-                i.putExtra("lat", lat);
-                i.putExtra("lng", lng);
-                startActivity(i);
+
                 overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
             }
         });
@@ -111,6 +100,12 @@ public class SelectOptionActivity extends BaseActivity implements SelectOptionVi
     public void onClick(View view) {
         super.onClick(view);
         switch (view.getId()) {
+            case R.id.tourist:
+                Intent i1 = new Intent(SelectOptionActivity.this, TouristsActivity.class);
+                i1.putExtra(Constants.LATITUDE, selectOptionPresenter.getLat());
+                i1.putExtra(Constants.LONGTITUDE, selectOptionPresenter.getLng());
+                startActivity(i1);
+                break;
             case R.id.restaurants:
                 Intent i = new Intent(SelectOptionActivity.this, RestaurantListActivity.class);
                 i.putExtra(Constants.LATITUDE, selectOptionPresenter.getLat());

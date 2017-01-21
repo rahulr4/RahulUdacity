@@ -71,6 +71,18 @@
             android:label="@string/reviews"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.tourist.TouristsActivity"
+            android:label="@string/tourist"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.tourist_places.TouristPlaceListActivity"
+            android:label="@string/tourist_places"
+            android:screenOrientation="portrait" />
+
+
+
         <receiver
             android:name=".receivers.NetworkChangeReceiver"
             android:enabled="true"

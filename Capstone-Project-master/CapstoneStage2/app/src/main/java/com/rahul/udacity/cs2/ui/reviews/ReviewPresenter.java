@@ -1,5 +1,7 @@
 package com.rahul.udacity.cs2.ui.reviews;
 
+import android.util.Log;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -24,11 +26,15 @@ class ReviewPresenter {
     }
 
     void getReviews(String url) {
+        Log.i("Volley Url", url);
+
         reviewsView.showProgress(true);
         JsonObjectRequest movieReq = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 reviewsView.showProgress(false);
+                Log.i("Volley Response", jsonObject.toString());
+
                 ArrayList<ReviewModel> reviewModelArrayList = new ArrayList<>();
                 try {
 
@@ -52,6 +58,8 @@ class ReviewPresenter {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 reviewsView.showProgress(false);
+                Log.i("Volley Error", volleyError.getMessage());
+
             }
         });
 

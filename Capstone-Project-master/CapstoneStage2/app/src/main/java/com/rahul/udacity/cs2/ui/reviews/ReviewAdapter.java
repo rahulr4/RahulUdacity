@@ -62,7 +62,7 @@ class ReviewAdapter extends BaseAdapter {
         Log.d("name", reviewModelArrayList.get(i).getAuthorName());
         holder.authorname.setText(reviewModelArrayList.get(i).getAuthorName());
         holder.authorreview.setText(reviewModelArrayList.get(i).getText());
-        holder.rating.setRating(Float.parseFloat(reviewModelArrayList.get(i).getRating());
+        holder.rating.setRating(Float.parseFloat(reviewModelArrayList.get(i).getRating()));
 
         return convertView;
     }

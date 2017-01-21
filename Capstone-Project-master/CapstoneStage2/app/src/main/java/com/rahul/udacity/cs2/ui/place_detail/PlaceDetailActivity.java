@@ -1,11 +1,10 @@
 package com.rahul.udacity.cs2.ui.place_detail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -15,9 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
@@ -33,6 +29,7 @@ import com.rahul.udacity.cs2.base.BaseActivity;
 import com.rahul.udacity.cs2.database.DatabaseSave;
 import com.rahul.udacity.cs2.ui.reviews.ReviewActivity;
 import com.rahul.udacity.cs2.utility.Constants;
+import com.rahul.udacity.cs2.utility.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,9 +37,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallback {
-
-    String phone_number, place_website;
+public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallback, PlaceDetailView {
+    private String phone_number, place_website;
     private static final String TAG_RESULT = "result";
     private static final String TAG_VICINITY = "vicinity";
     private static final String TAG_PLACE_NAME = "name";
@@ -58,7 +54,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
     private static final String TAG_LOCATION = "location";
     private static final String TAG_LAT = "lat";
     private static final String TAG_LNG = "lng";
-
+    private ArrayList<String> photos_references = new ArrayList<>();
     DatabaseSave db;
     ImageView image, share;
     TextView place_name, place_vicinity, place_address, rating;
@@ -69,15 +65,55 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
     ImageView saveImage;
     TextView saveText;
     int choice;
-    ArrayList<String> photos_references = new ArrayList<>();
+
     private GoogleMap googleMap;
     private String url;
+    private PlaceDetailPresenter placeDetailPresenter;
+
+
+    public void setMap(double lat, double lng) {
+        LatLng sydney = new LatLng(lat, lng);
+        googleMap.addMarker(new MarkerOptions().position(sydney).title("Here"));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12.0f));
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.place_detail_layout);
+    public void onMapReady(GoogleMap googleMap) {
+        this.googleMap = googleMap;
+        placeDetailPresenter.getPlaceDetail(url);
+    }
 
+    public void setPhotos() {
+
+        ImageView img;
+
+        for (int i = 0; i < photos_references.size(); i++) {
+            img = new ImageView(PlaceDetailActivity.this);
+
+            img.setPadding(5, 0, 5, 0);
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            String photo = photos_references.get(i);
+            img.setLayoutParams(params);
+            Log.d("reference", photos_references.get(i));
+
+            Glide.with(PlaceDetailActivity.this).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference="
+                    + photo + "&key=" + getString(R.string.api_key))
+                    .asBitmap().override(300, 300).into(img);
+            photo_layout.addView(img);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Tracker t = ApplicationController.getApplicationInstance().getTracker();
+        t.setScreenName("Place Detail Screen");
+        t.send(new HitBuilders.AppViewBuilder().build());
+    }
+
+    @Override
+    protected void initUi() {
+        placeDetailPresenter = new PlaceDetailPresenter(this);
         db = new DatabaseSave(this);
 
         image = (ImageView) findViewById(R.id.imagePosterFull);
@@ -154,7 +190,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                             saveText.setTextColor(Color.RED);
                             db.addPlaces(place_id);
                         } else {
-                            Snackbar.make(view, "Already Added", Snackbar.LENGTH_SHORT).show();
+                            Utility.showSnackBar(getActivity(), "Already Added");
                         }
                         break;
 
@@ -166,7 +202,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                             saveText.setTextColor(Color.RED);
                             db.addHotels(place_id);
                         } else {
-                            Snackbar.make(view, "Already Added", Snackbar.LENGTH_SHORT).show();
+                            Utility.showSnackBar(getActivity(), "Already Added");
                         }
                         break;
 
@@ -178,7 +214,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                             saveText.setTextColor(Color.RED);
                             db.addRestaurants(place_id);
                         } else {
-                            Snackbar.make(view, "Already Added", Snackbar.LENGTH_SHORT).show();
+                            Utility.showSnackBar(getActivity(), "Already Added");
                         }
                         break;
 
@@ -189,7 +225,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                             saveText.setTextColor(Color.RED);
                             db.addPlaces(place_id);
                         } else {
-                            Snackbar.make(view, "Already Added", Snackbar.LENGTH_SHORT).show();
+                            Utility.showSnackBar(getActivity(), "Already Added");
                         }
                         break;
                 }
@@ -210,143 +246,97 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
         });
     }
 
-    public void getPlaceDetail(String url) {
-        final ArrayList<String> photos_reference = new ArrayList<>();
-        JsonObjectRequest movieReq = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject jsonObject) {
-                try {
-
-                    JSONObject list = jsonObject.getJSONObject(TAG_RESULT);
-
-                    if (list.has(TAG_PHOTO)) {
-                        JSONArray photos = list.getJSONArray(TAG_PHOTO);
-
-                        for (int j = 0; j < photos.length(); j++) {
-                            JSONObject photo = photos.getJSONObject(j);
-
-                            photos_reference.add(photo.getString(TAG_PHOTOS_REFERENCE));
-                            photos_references.add(photo.getString(TAG_PHOTOS_REFERENCE));
-
-                        }
-
-                        Glide.with(PlaceDetailActivity.this).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference="
-                                + photos_reference.get(0) + "&key=" + getString(R.string.api_key)).asBitmap().into(image);
-                        image.setAlpha(0.6f);
-
-                    } else {
-                        card2.setVisibility(View.GONE);
-                    }
-
-                    String placename = list.getString(TAG_PLACE_NAME);
-                    place_name.setText(placename);
-
-                    String vicinity = list.getString(TAG_VICINITY);
-                    place_vicinity.setText(vicinity);
-
-                    String address = list.getString(TAG_FORMATTED_ADDRESS);
-                    place_address.setText(address);
-
-                    JSONObject geometry = list.getJSONObject(TAG_GEOMETRY);
-                    JSONObject location = geometry.getJSONObject(TAG_LOCATION);
-
-                    lat = Double.parseDouble(location.getString(TAG_LAT));
-                    lng = Double.parseDouble(location.getString(TAG_LNG));
-
-                    double rate = list.getDouble(TAG_TOTAL_RATING);
-                    rating.setText(rate + " user ratings");
-
-                    if (list.has(TAG_OPENING_HOURS)) {
-                        JSONObject opening_hours = list.getJSONObject(TAG_OPENING_HOURS);
-
-                        JSONArray times = opening_hours.getJSONArray(TAG_TIMETABLE);
-
-                        TextView textView;
-
-                        for (int j = 0; j < times.length(); j++) {
-                            String time1 = (String) times.get(j);
-                            textView = new TextView(getActivity());
-                            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                            textView.setLayoutParams(params);
-                            textView.setPadding(3, 8, 3, 8);
-                            textView.setText(time1);
-                            textView.setTextSize(17);
-                            textView.setTextColor(Color.parseColor("#2f2f2f"));
-
-                            timetable.addView(textView);
-                        }
-                    } else {
-                        card3.setVisibility(View.GONE);
-                    }
-
-                    place_website = list.getString(TAG_WEBSITE);
-                    phone_number = list.getString(TAG_PHONE_NUMBER);
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                setMap(lat, lng);
-                setPhotos();
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-            }
-        });
-
-        ApplicationController.getApplicationInstance().addToRequestQueue(movieReq);
-    }
-
-    public void setMap(double lat, double lng) {
-        LatLng sydney = new LatLng(lat, lng);
-        googleMap.addMarker(new MarkerOptions().position(sydney).title("Here"));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), 12.0f));
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        this.googleMap = googleMap;
-        getPlaceDetail(url);
-    }
-
-    public void setPhotos() {
-
-        ImageView img;
-
-        for (int i = 0; i < photos_references.size(); i++) {
-            img = new ImageView(PlaceDetailActivity.this);
-
-            img.setPadding(5, 0, 5, 0);
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            String photo = photos_references.get(i);
-            img.setLayoutParams(params);
-            Log.d("reference", photos_references.get(i));
-
-            Glide.with(PlaceDetailActivity.this).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference="
-                    + photo + "&key=" + getString(R.string.api_key))
-                    .asBitmap().override(300, 300).into(img);
-            photo_layout.addView(img);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Tracker t = ApplicationController.getApplicationInstance().getTracker();
-        t.setScreenName("Place Detail Screen");
-        t.send(new HitBuilders.AppViewBuilder().build());
-    }
-
-    @Override
-    protected void initUi() {
-
-    }
-
     @Override
     protected int getLayoutById() {
         return R.layout.place_detail_layout;
+    }
+
+    @Override
+    public Context getViewContext() {
+        return this;
+    }
+
+    @Override
+    public void showProgress(boolean showProgress) {
+        showProgressDialog(showProgress);
+    }
+
+    @Override
+    public void parseData(JSONObject jsonObject) {
+        try {
+
+            JSONObject list = jsonObject.getJSONObject(TAG_RESULT);
+            final ArrayList<String> photos_reference = new ArrayList<>();
+
+            if (list.has(TAG_PHOTO)) {
+                JSONArray photos = list.getJSONArray(TAG_PHOTO);
+
+                for (int j = 0; j < photos.length(); j++) {
+                    JSONObject photo = photos.getJSONObject(j);
+
+                    photos_reference.add(photo.getString(TAG_PHOTOS_REFERENCE));
+                    photos_references.add(photo.getString(TAG_PHOTOS_REFERENCE));
+
+                }
+
+                Glide.with(PlaceDetailActivity.this).load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&photoreference="
+                        + photos_reference.get(0) + "&key=" + getString(R.string.api_key)).asBitmap().into(image);
+                image.setAlpha(0.6f);
+
+            } else {
+                card2.setVisibility(View.GONE);
+            }
+
+            String placename = list.getString(TAG_PLACE_NAME);
+            place_name.setText(placename);
+
+            String vicinity = list.getString(TAG_VICINITY);
+            place_vicinity.setText(vicinity);
+
+            String address = list.getString(TAG_FORMATTED_ADDRESS);
+            place_address.setText(address);
+
+            JSONObject geometry = list.getJSONObject(TAG_GEOMETRY);
+            JSONObject location = geometry.getJSONObject(TAG_LOCATION);
+
+            lat = Double.parseDouble(location.getString(TAG_LAT));
+            lng = Double.parseDouble(location.getString(TAG_LNG));
+
+            double rate = list.getDouble(TAG_TOTAL_RATING);
+            rating.setText(rate + " user ratings");
+
+            if (list.has(TAG_OPENING_HOURS)) {
+                JSONObject opening_hours = list.getJSONObject(TAG_OPENING_HOURS);
+
+                JSONArray times = opening_hours.getJSONArray(TAG_TIMETABLE);
+
+                TextView textView;
+
+                for (int j = 0; j < times.length(); j++) {
+                    String time1 = (String) times.get(j);
+                    textView = new TextView(getActivity());
+                    ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                    textView.setLayoutParams(params);
+                    textView.setPadding(3, 8, 3, 8);
+                    textView.setText(time1);
+                    textView.setTextSize(17);
+                    textView.setTextColor(Color.parseColor("#2f2f2f"));
+
+                    timetable.addView(textView);
+                }
+            } else {
+                card3.setVisibility(View.GONE);
+            }
+
+            place_website = list.getString(TAG_WEBSITE);
+            phone_number = list.getString(TAG_PHONE_NUMBER);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        setMap(lat, lng);
+        setPhotos();
     }
 }

@@ -1,6 +1,7 @@
 package com.rahul.udacity.cs2.ui.restaurant_list.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.model.PlaceListDetail;
+import com.rahul.udacity.cs2.ui.place_detail.PlaceDetailActivity;
+import com.rahul.udacity.cs2.utility.Constants;
 
 import java.util.List;
 
@@ -39,12 +42,12 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.View
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*String place_id = list.get(vh.getAdapterPosition()).getPlace_id();
+                String place_id = list.get(vh.getAdapterPosition()).getPlace_id();
 
                 Intent intent = new Intent(context, PlaceDetailActivity.class);
-                intent.putExtra("place_id", place_id);
-                intent.putExtra("choice", choice);
-                context.startActivity(intent);*/
+                intent.putExtra(Constants.PLACE_ID, place_id);
+                intent.putExtra(Constants.CHOICE, choice);
+                context.startActivity(intent);
             }
         });
 
@@ -57,7 +60,7 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.View
         String url;
 
         if (placeListDetail.getPhoto_reference() != null) {
-            url = "https://maps.googleapis.com/maps/api/place/photo?maxheight=220&photoreference=" + placeListDetail.getPhoto_reference().get(0) + "&key=API_KEY";
+            url = "https://maps.googleapis.com/maps/api/place/photo?maxheight=220&photoreference=" + placeListDetail.getPhoto_reference().get(0) + "&key=" + context.getString(R.string.api_key);
         } else {
             url = placeListDetail.getIcon_url();
         }

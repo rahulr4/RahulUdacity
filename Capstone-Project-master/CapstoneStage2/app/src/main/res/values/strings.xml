@@ -73,4 +73,11 @@
     <string name="shopping">Shopping</string>
     <string name="flights">Flights</string>
     <string name="restaurants">Restaurants</string>
+    <string name="call">CALL</string>
+    <string name="website">WEBSITE</string>
+    <string name="reviews">REVIEWS</string>
+    <string name="save">SAVE</string>
+    <string name="address">ADDRESS</string>
+    <string name="photo">PHOTOS</string>
+    <string name="time">TIME</string>
 </resources>

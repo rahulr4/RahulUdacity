@@ -19,4 +19,5 @@ public class Constants {
     public static final String LATITUDE = "lat";
     public static final String LONGTITUDE = "long";
     public static final int TYPE_RESTAURANTS = 3;
+    public static final String CHOICE = "choice";
 }

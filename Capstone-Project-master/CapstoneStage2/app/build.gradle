@@ -56,6 +56,7 @@ dependencies {
     compile 'com.github.nirhart:parallaxscroll:1.0'
     compile project(':kumulos-2.1.0-debug')
     compile project(':facebooklibrary')
+    compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.google.android.gms:play-services-analytics:10.0.1'
     compile 'com.google.android.gms:play-services-ads:10.0.1'

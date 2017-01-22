@@ -25,6 +25,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
 
     private static final String TAG_RESULT = "result";
     RemoteViews view;
+    public static String WIDGET_UPDATE_ACTION = "com.rahul.udacity.cs2.UPDATE_WIDGET";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -42,7 +43,8 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
                 Log.i("CapstoneWidget", "Got Data");
                 do {
                     Log.v("--", "FOUND FROM DB:" + data.getString(1));
-                    String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + data.getString(1) + "&key=API_KEY";
+                    String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
+                            + data.getString(1) + "&key=" + context.getString(R.string.api_key);
                     getPlaceDetail(url);
 
                 } while (data.moveToNext());
@@ -74,6 +76,16 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle newOptions) {
+    }
+
+    public static PendingIntent buildButtonPendingIntent(Context context) {
+        ++MyWidgetIntentReceiver.clickCount;
+
+        // initiate widget update request
+        Intent intent = new Intent();
+        intent.setAction(WIDGET_UPDATE_ACTION);
+        return PendingIntent.getBroadcast(context, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     public void getPlaceDetail(String url) {

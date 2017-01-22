@@ -39,7 +39,8 @@ public class HomeActivity extends BaseActivity implements HomeView {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
             mDrawerLayout.closeDrawers();
         else
-            showConfirmationDialog();
+            super.onBackPressed();
+//            showConfirmationDialog();
     }
 
     @Override

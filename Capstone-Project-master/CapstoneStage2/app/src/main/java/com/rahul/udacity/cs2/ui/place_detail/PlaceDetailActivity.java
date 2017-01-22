@@ -177,7 +177,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
         call_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:" + phone_number));
                 startActivity(callIntent);
             }
@@ -214,11 +214,11 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
 
                         if (!db.getPlaces(place_id)) {
                             saveImage.setImageResource(R.drawable.favourite_icon_red);
-                            saveText.setText("SAVED");
+                            saveText.setText(R.string.saved);
                             saveText.setTextColor(Color.RED);
                             db.addPlaces(place_id);
                         } else {
-                            Utility.showSnackBar(getActivity(), "Already Added");
+                            Utility.showSnackBar(getActivity(), getString(R.string.already_added));
                         }
                         break;
 
@@ -226,11 +226,11 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
 
                         if (!db.gethotel(place_id)) {
                             saveImage.setImageResource(R.drawable.favourite_icon_red);
-                            saveText.setText("SAVED");
+                            saveText.setText(R.string.saved);
                             saveText.setTextColor(Color.RED);
                             db.addHotels(place_id);
                         } else {
-                            Utility.showSnackBar(getActivity(), "Already Added");
+                            Utility.showSnackBar(getActivity(), getString(R.string.already_added));
                         }
                         break;
 
@@ -238,22 +238,22 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
 
                         if (!db.getRes(place_id)) {
                             saveImage.setImageResource(R.drawable.favourite_icon_red);
-                            saveText.setText("SAVED");
+                            saveText.setText(R.string.saved);
                             saveText.setTextColor(Color.RED);
                             db.addRestaurants(place_id);
                         } else {
-                            Utility.showSnackBar(getActivity(), "Already Added");
+                            Utility.showSnackBar(getActivity(), getString(R.string.already_added));
                         }
                         break;
 
                     case 4:
                         if (!db.getPlaces(place_id)) {
                             saveImage.setImageResource(R.drawable.favourite_icon_red);
-                            saveText.setText("SAVED");
+                            saveText.setText(R.string.saved);
                             saveText.setTextColor(Color.RED);
                             db.addPlaces(place_id);
                         } else {
-                            Utility.showSnackBar(getActivity(), "Already Added");
+                            Utility.showSnackBar(getActivity(), getString(R.string.already_added));
                         }
                         break;
                 }

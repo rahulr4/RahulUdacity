@@ -92,4 +92,6 @@
     <string name="flight_departure">Departure Terminal : <xliff:g id="kilogram">%1$s</xliff:g></string>
     <string name="no_data">No saved data available</string>
     <string name="lbl_hiphen">-</string>
+    <string name="saved">SAVED</string>
+    <string name="already_added">Already Added</string>
 </resources>

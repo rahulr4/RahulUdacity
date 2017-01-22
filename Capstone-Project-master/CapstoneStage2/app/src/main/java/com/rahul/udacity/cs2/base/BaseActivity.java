@@ -66,14 +66,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Utility.exportDatabase(BaseActivity.this, "qatarcool.db");
-
-        Utility.changeToArabic(this);
-    }
-
     protected void setBackButtonEnabled() {
         if (headerToolBar != null) {
             headerToolBar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);

@@ -29,16 +29,17 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
+        Log.i("CapstoneWidget", "OnUpdate Called");
         ComponentName thisWidget = new ComponentName(context,
                 MyAppWidgetProvider.class);
         int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
         for (int widgetId : allWidgetIds) {
 
             view = new RemoteViews(context.getPackageName(), R.layout.appwidget);
-
+            Log.i("CapstoneWidget", "Remote View Initialized");
             Cursor data = new DatabaseSave(context).getSavedHotels();
             if (data.moveToFirst()) {
-
+                Log.i("CapstoneWidget", "Got Data");
                 do {
                     Log.v("--", "FOUND FROM DB:" + data.getString(1));
                     String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + data.getString(1) + "&key=API_KEY";
@@ -80,9 +81,10 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 try {
-
+                    Log.i("CapstoneWidget", "Api Response");
                     JSONObject list = jsonObject.getJSONObject(TAG_RESULT);
                     String placeName = list.getString("name");
+                    Log.i("CapstoneWidget", "Hotel Name :- " + placeName);
                     view.setTextViewText(R.id.place_name, placeName);
 
                 } catch (Exception e) {
@@ -92,6 +94,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                Log.i("CapstoneWidget", "Error :- " + volleyError.getMessage());
             }
         });
 

@@ -131,6 +131,13 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api_key" />
+
+        <provider
+            android:name=".database.TravelProvider"
+            android:authorities="com.rahul.udacity.cs2.provider"
+            android:exported="false"
+            android:syncable="true" />
+
     </application>
 
 </manifest>

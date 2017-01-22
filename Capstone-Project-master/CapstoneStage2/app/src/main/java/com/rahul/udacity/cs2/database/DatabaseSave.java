@@ -19,13 +19,13 @@ public class DatabaseSave extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "rahul_capstone";
 
     // Contacts table name
-    private static final String TABLE_PLACES = "tbl_places";
+    static final String TABLE_PLACES = "tbl_places";
     private static final String TABLE_RESTAURANTS = "tbl_restaurants";
     private static final String TABLE_HOTELS = "tbl_hotels";
 
     // Contacts Table Columns names
     private static final String KEY_ID = "id";
-    private static final String KEY_PLACE_ID = "place_id";
+     static final String KEY_PLACE_ID = "place_id";
 
     private static final String KEY_ID1 = "id";
     private static final String KEY_RESTAURANTS_ID = "restaurant_id";

@@ -26,10 +26,12 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
     private static final String TAG_RESULT = "result";
     RemoteViews view;
     public static String WIDGET_UPDATE_ACTION = "com.rahul.udacity.cs2.UPDATE_WIDGET";
+    private AppWidgetManager appWidgetManager;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
+        this.appWidgetManager = appWidgetManager;
         Log.i("CapstoneWidget", "OnUpdate Called");
         ComponentName thisWidget = new ComponentName(context,
                 MyAppWidgetProvider.class);
@@ -45,7 +47,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
                     Log.v("--", "FOUND FROM DB:" + data.getString(1));
                     String url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="
                             + data.getString(1) + "&key=" + context.getString(R.string.api_key);
-                    getPlaceDetail(url);
+                    getPlaceDetail(url, widgetId);
 
                 } while (data.moveToNext());
             }
@@ -88,7 +90,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    public void getPlaceDetail(String url) {
+    public void getPlaceDetail(String url, final int widgetId) {
         JsonObjectRequest movieReq = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -98,6 +100,7 @@ public class MyAppWidgetProvider extends AppWidgetProvider {
                     String placeName = list.getString("name");
                     Log.i("CapstoneWidget", "Hotel Name :- " + placeName);
                     view.setTextViewText(R.id.place_name, placeName);
+                    appWidgetManager.updateAppWidget(widgetId, view);
 
                 } catch (Exception e) {
                     e.printStackTrace();

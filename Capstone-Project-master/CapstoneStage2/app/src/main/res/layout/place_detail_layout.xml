@@ -32,6 +32,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/colorPrimary"
+                        android:contentDescription="@string/app_name"
                         android:scaleType="centerCrop"
                         app:layout_collapseMode="parallax" />
 
@@ -124,6 +125,7 @@
                             android:paddingTop="4dp">
 
                             <ImageView
+                                android:contentDescription="@string/app_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -158,6 +160,7 @@
                             android:paddingTop="4dp">
 
                             <ImageView
+                                android:contentDescription="@string/app_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -192,6 +195,7 @@
                             android:paddingTop="4dp">
 
                             <ImageView
+                                android:contentDescription="@string/app_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -227,6 +231,7 @@
                             android:paddingTop="4dp">
 
                             <ImageView
+                                android:contentDescription="@string/app_name"
                                 android:id="@+id/saveImage"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

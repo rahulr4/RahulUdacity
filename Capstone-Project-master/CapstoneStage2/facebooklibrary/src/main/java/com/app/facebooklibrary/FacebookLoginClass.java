@@ -59,7 +59,7 @@ public class FacebookLoginClass implements FbCallback {
         @Override
         public void onError(FacebookException error) {
             if (listnerCallBack != null)
-                listnerCallBack.onPostFailure(error.getMessage().toString());
+                listnerCallBack.onPostFailure(error.getMessage());
             Log.d("HelloFacebook", String.format("Error: %s", error.toString()));
 
         }
@@ -350,19 +350,18 @@ public class FacebookLoginClass implements FbCallback {
                     public void onCompleted(GraphResponse response) {
                         ArrayList<String> facebookIdsArray = new ArrayList<>();
                         ArrayList<String> facebookNameArray = new ArrayList<>();
-                        if (facebookIdsArray != null && facebookNameArray != null)
-                            try {
-                                JSONObject jsonObject = new JSONObject(response.getRawResponse());
-                                JSONArray jsonArray = jsonObject.getJSONArray("data");
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    facebookIdsArray.add(jsonArray.getJSONObject(i).getString("id"));
-                                    facebookNameArray.add(jsonArray.getJSONObject(i).getString("name"));
-                                }
-                                if (fbFriendsCallback != null)
-                                    fbFriendsCallback.getFriendsIdsArray(facebookIdsArray, facebookNameArray);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.getRawResponse());
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                facebookIdsArray.add(jsonArray.getJSONObject(i).getString("id"));
+                                facebookNameArray.add(jsonArray.getJSONObject(i).getString("name"));
                             }
+                            if (fbFriendsCallback != null)
+                                fbFriendsCallback.getFriendsIdsArray(facebookIdsArray, facebookNameArray);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         System.out.println(response);
             /* handle the result */
                     }

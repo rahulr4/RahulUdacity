@@ -9,7 +9,6 @@ import com.rahul.udacity.cs2.base.ApplicationController;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 
 /**
  * Created by rahulgupta on 21/01/17.

@@ -85,12 +85,17 @@ public class DatabaseSave extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                // Adding contact to list
-                List.add(cursor.getString(1));
-            } while (cursor.moveToNext());
+        try {
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    // Adding contact to list
+                    List.add(cursor.getString(1));
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
         }
         // return contact list
         return List;
@@ -102,10 +107,11 @@ public class DatabaseSave extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_PLACES, new String[]{KEY_ID,
                         KEY_PLACE_ID}, KEY_PLACE_ID + "=?",
                 new String[]{id}, null, null, null, null);
-        if (cursor.moveToFirst()) {
-            return true;
-        } else {
-            return false;
+        try {
+            return cursor.moveToFirst();
+        } finally {
+            if (cursor != null)
+                cursor.close();
         }
     }
 
@@ -129,11 +135,16 @@ public class DatabaseSave extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                // Adding contact to list
-                List.add(cursor.getString(1));
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    // Adding contact to list
+                    List.add(cursor.getString(1));
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
         }
         // return contact list
         return List;
@@ -145,10 +156,11 @@ public class DatabaseSave extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_RESTAURANTS, new String[]{KEY_ID1,
                         KEY_RESTAURANTS_ID}, KEY_RESTAURANTS_ID + "=?",
                 new String[]{id}, null, null, null, null);
-        if (cursor.moveToFirst()) {
-            return true;
-        } else {
-            return false;
+        try {
+            return cursor.moveToFirst();
+        } finally {
+            if (cursor != null)
+                cursor.close();
         }
     }
 
@@ -172,11 +184,16 @@ public class DatabaseSave extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                // Adding contact to list
-                List.add(cursor.getString(1));
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    // Adding contact to list
+                    List.add(cursor.getString(1));
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
         }
         // return contact list
         return List;
@@ -188,10 +205,11 @@ public class DatabaseSave extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_HOTELS, new String[]{KEY_ID2,
                         KEY_HOTELS_ID}, KEY_HOTELS_ID + "=?",
                 new String[]{id}, null, null, null, null);
-        if (cursor.moveToFirst()) {
-            return true;
-        } else {
-            return false;
+        try {
+            return cursor.moveToFirst();
+        } finally {
+            if (cursor != null)
+                cursor.close();
         }
     }
 

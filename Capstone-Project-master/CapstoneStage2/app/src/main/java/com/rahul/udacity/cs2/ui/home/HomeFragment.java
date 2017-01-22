@@ -34,7 +34,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     protected void initUi() {
-        HomePresenter homePresenter = new HomePresenter(this);
+        HomePresenter homePresenter = new HomePresenter();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.places_rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -55,7 +55,10 @@ public class HomeFragment extends BaseFragment implements HomeView {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final PlaceAutoCompleteAdapter.PlaceAutocomplete item = mAdapter.getItem(i);
-                final String placeId = String.valueOf(item.placeId);
+                String placeId = null;
+                if (item != null) {
+                    placeId = String.valueOf(item.placeId);
+                }
 
                 Intent i1 = new Intent(getActivity(), SelectOptionActivity.class);
                 i1.putExtra(Constants.PLACE_ID, placeId);

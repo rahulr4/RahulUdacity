@@ -8,11 +8,9 @@ import java.util.ArrayList;
  * Created by rahulgupta on 21/01/17.
  */
 class HomePresenter {
-    private HomeView homeView;
 
-    HomePresenter(HomeView homeView) {
+    HomePresenter() {
 
-        this.homeView = homeView;
     }
 
     ArrayList<HomeModel> createList() {

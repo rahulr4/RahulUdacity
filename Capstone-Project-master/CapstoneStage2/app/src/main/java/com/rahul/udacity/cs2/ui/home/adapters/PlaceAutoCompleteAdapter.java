@@ -1,6 +1,7 @@
 package com.rahul.udacity.cs2.ui.home.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
@@ -83,9 +84,10 @@ public class PlaceAutoCompleteAdapter
     /**
      * Returns the filter for the current set of autocomplete results.
      */
+    @NonNull
     @Override
     public Filter getFilter() {
-        Filter filter = new Filter() {
+        return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
@@ -113,7 +115,6 @@ public class PlaceAutoCompleteAdapter
                 }
             }
         };
-        return filter;
     }
 
     private ArrayList<PlaceAutocomplete> getAutocomplete(CharSequence constraint) {

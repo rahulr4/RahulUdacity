@@ -12,6 +12,7 @@ import android.os.Bundle;
 import com.rahul.udacity.cs2.database.DatabaseSave;
 import com.rahul.udacity.cs2.ui.widget.MyAppWidgetProvider;
 
+@Deprecated
 public class WidgetIntentService extends IntentService implements LoaderManager.LoaderCallbacks<Cursor> {
 
     DatabaseSave db;

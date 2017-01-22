@@ -16,12 +16,10 @@ import java.util.ArrayList;
 
 class ReviewAdapter extends BaseAdapter {
 
-    private Context ctx;
     private LayoutInflater mInflater;
     private ArrayList<ReviewModel> reviewModelArrayList;
 
     ReviewAdapter(Context c, ArrayList<ReviewModel> reviewModelArrayList) {
-        this.ctx = c;
         mInflater = (LayoutInflater) c
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.reviewModelArrayList = reviewModelArrayList;

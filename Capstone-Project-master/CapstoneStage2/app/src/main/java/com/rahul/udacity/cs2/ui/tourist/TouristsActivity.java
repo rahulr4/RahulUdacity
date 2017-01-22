@@ -26,7 +26,6 @@ public class TouristsActivity extends BaseActivity implements TouristsView {
     private Double latitude, longitude;
     FloatingActionButton category;
     AdView mAdView1;
-    private TouristsPresenter touristsPresenter;
     private RecyclerView recyclerView;
 
     @Override
@@ -40,7 +39,7 @@ public class TouristsActivity extends BaseActivity implements TouristsView {
     @Override
     protected void initUi() {
         setBackButtonEnabled();
-        touristsPresenter = new TouristsPresenter(this);
+        TouristsPresenter touristsPresenter = new TouristsPresenter(this);
         mAdView1 = (AdView) findViewById(R.id.adView1);
 
         AdRequest adRequest = new AdRequest.Builder().addTestDevice("EAA80D31926665B9575A0981DE305DB8")

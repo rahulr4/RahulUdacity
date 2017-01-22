@@ -11,12 +11,11 @@ import com.rahul.udacity.cs2.utility.Utility;
 class AsyncRegisterInteractor {
 
     void validateCredentialsAsync(final ApiListener listener, RequestBean requestBean) {
-        if (ApplicationController.getApplicationInstance().isNetworkConnected()) {
-
-            //TODO Api logic for register
-        } else
+        if (!ApplicationController.getApplicationInstance().isNetworkConnected()) {
             Utility.showSnackBar((Activity) listener.getViewContext(),
                     listener.getViewContext().getString(R.string.no_internet_connection));
-        // SOAP Api Logic
+        } else {
+            //TODO Api logic for register
+        }
     }
 }

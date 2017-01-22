@@ -91,4 +91,5 @@
     <string name="price_flight">Rs. <xliff:g id="kilogram">%1$d</xliff:g></string>
     <string name="flight_departure">Departure Terminal : <xliff:g id="kilogram">%1$s</xliff:g></string>
     <string name="no_data">No saved data available</string>
+    <string name="lbl_hiphen">-</string>
 </resources>

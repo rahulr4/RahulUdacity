@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
-                    android:text="-" />
+                    android:text="@string/lbl_hiphen" />
 
                 <TextView
                     android:id="@+id/tTime"

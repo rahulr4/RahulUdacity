@@ -15,7 +15,10 @@
         android:drawablePadding="10dp"
         android:drawableStart="@mipmap/ic_search_black"
         android:hint="@string/search"
-        android:paddingLeft="10dp" />
+        android:paddingEnd="@dimen/margin_10"
+        android:paddingLeft="10dp"
+        android:paddingRight="@dimen/margin_10"
+        android:paddingStart="@dimen/margin_10" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/places_rv"

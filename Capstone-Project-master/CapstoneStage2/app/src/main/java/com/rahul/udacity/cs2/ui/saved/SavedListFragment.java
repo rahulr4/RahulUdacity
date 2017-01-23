@@ -1,6 +1,12 @@
 package com.rahul.udacity.cs2.ui.saved;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -12,20 +18,24 @@ import com.rahul.udacity.cs2.R;
 import com.rahul.udacity.cs2.base.ApplicationController;
 import com.rahul.udacity.cs2.base.BaseFragment;
 import com.rahul.udacity.cs2.database.DatabaseSave;
+import com.rahul.udacity.cs2.database.TravelProvider;
 import com.rahul.udacity.cs2.model.PlaceListDetail;
 import com.rahul.udacity.cs2.ui.home.NavDrawerEnum;
 import com.rahul.udacity.cs2.ui.restaurant_list.adapters.PlaceListAdapter;
 import com.rahul.udacity.cs2.utility.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SavedListFragment extends BaseFragment implements SavedListView {
+public class SavedListFragment extends BaseFragment implements SavedListView, LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final int SAVED_PLACES_LOADER_ID = 0;
+    private static final int SAVED_RESTAURANT_LOADER_ID = 1;
+    private static final int SAVED_HOTEL_LOADER_ID = 2;
     TextView noDataTv;
     DatabaseSave db;
-
-
     private RecyclerView recyclerView;
+    private SavedListPresenter savedListPresenter;
 
     @Override
     public void onResume() {
@@ -37,6 +47,7 @@ public class SavedListFragment extends BaseFragment implements SavedListView {
 
     @Override
     protected void initUi() {
+
         db = new DatabaseSave(mContext);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -49,7 +60,7 @@ public class SavedListFragment extends BaseFragment implements SavedListView {
         noDataTv = (TextView) findViewById(R.id.nodata);
         noDataTv.setVisibility(View.GONE);
 
-        SavedListPresenter savedListPresenter = new SavedListPresenter(this);
+        savedListPresenter = new SavedListPresenter(this);
 
         String mode = getArguments().getString(Constants.MODE, "");
         showProgress(false);
@@ -57,30 +68,19 @@ public class SavedListFragment extends BaseFragment implements SavedListView {
         switch (navDrawerEnum) {
             case SAVED_PLACES:
 
-                if (!db.getAllPlaces().isEmpty()) {
-                    savedListPresenter.getPlaceDetail(db.getAllPlaces());
-                } else {
-                    noDataTv.setVisibility(View.VISIBLE);
-                }
-
+                getActivity().getSupportLoaderManager().initLoader(
+                        SAVED_PLACES_LOADER_ID, null, this);
                 break;
             case SAVED_RESTAURANTS:
 
-                if (!db.getAllRes().isEmpty()) {
-                    savedListPresenter.getPlaceDetail(db.getAllRes());
-                } else {
-                    noDataTv.setVisibility(View.VISIBLE);
-                }
-
+                getActivity().getSupportLoaderManager().initLoader(
+                        SAVED_RESTAURANT_LOADER_ID, null, this);
                 break;
 
             case SAVED_HOTELS:
+                getActivity().getSupportLoaderManager().initLoader(
+                        SAVED_HOTEL_LOADER_ID, null, this);
 
-                if (!db.getAllHotels().isEmpty()) {
-                    savedListPresenter.getPlaceDetail(db.getAllHotels());
-                } else {
-                    noDataTv.setVisibility(View.VISIBLE);
-                }
         }
     }
 
@@ -96,6 +96,13 @@ public class SavedListFragment extends BaseFragment implements SavedListView {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().getSupportLoaderManager().destroyLoader(SAVED_PLACES_LOADER_ID);
+
+    }
+
+    @Override
     public Context getViewContext() {
         return mContext;
     }
@@ -104,4 +111,55 @@ public class SavedListFragment extends BaseFragment implements SavedListView {
     public void showProgress(boolean showProgress) {
         showProgressBar(showProgress);
     }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int loaderId, Bundle args) {
+        Uri uri = null;
+        if (loaderId == SAVED_PLACES_LOADER_ID) {
+            uri = TravelProvider.withPlaceId();
+        } else if (loaderId == SAVED_RESTAURANT_LOADER_ID) {
+            uri = TravelProvider.withResId();
+        } else if (loaderId == SAVED_HOTEL_LOADER_ID) {
+            uri = TravelProvider.wihtHotelId();
+        }
+        return new CursorLoader(mContext, uri, null, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
+        ArrayList<String> List = new ArrayList<>();
+        // Select All Query
+        try {
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    // Adding contact to list
+                    switch (loader.getId()) {
+                        case SAVED_PLACES_LOADER_ID:
+                            List.add(cursor.getString(cursor.getColumnIndex(DatabaseSave.KEY_PLACE_ID)));
+                            break;
+                        case SAVED_RESTAURANT_LOADER_ID:
+                            List.add(cursor.getString(cursor.getColumnIndex(DatabaseSave.KEY_RESTAURANTS_ID)));
+                            break;
+                        case SAVED_HOTEL_LOADER_ID:
+                            List.add(cursor.getString(cursor.getColumnIndex(DatabaseSave.KEY_HOTELS_ID)));
+                            break;
+                    }
+
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        savedListPresenter.getPlaceDetail(List);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        loader.reset();
+
+    }
+
 }

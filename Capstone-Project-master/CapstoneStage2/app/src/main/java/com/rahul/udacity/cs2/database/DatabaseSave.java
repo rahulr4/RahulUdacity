@@ -6,9 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DatabaseSave extends SQLiteOpenHelper {
 
     // All Static variables
@@ -20,18 +17,21 @@ public class DatabaseSave extends SQLiteOpenHelper {
 
     // Contacts table name
     static final String TABLE_PLACES = "tbl_places";
-    private static final String TABLE_RESTAURANTS = "tbl_restaurants";
-    private static final String TABLE_HOTELS = "tbl_hotels";
+    static final String TABLE_RESTAURANTS = "tbl_restaurants";
+    static final String TABLE_HOTELS = "tbl_hotels";
 
     // Contacts Table Columns names
-    private static final String KEY_ID = "id";
-     static final String KEY_PLACE_ID = "place_id";
+    public static final String KEY_ID = "id";
+    public static final String KEY_PLACE_ID = "place_id";
+    public static final String KEY_PLACE_NAME = "place_name";
 
     private static final String KEY_ID1 = "id";
-    private static final String KEY_RESTAURANTS_ID = "restaurant_id";
+    public static final String KEY_RESTAURANTS_ID = "restaurant_id";
+    private static final String KEY_RESTAURANTS_NAME = "restaurant_name";
 
     private static final String KEY_ID2 = "id";
-    private static final String KEY_HOTELS_ID = "hotel_id";
+    public static final String KEY_HOTELS_ID = "hotel_id";
+    private static final String KEY_HOTELS_NAME = "hotel_name";
 
     public DatabaseSave(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,15 +41,15 @@ public class DatabaseSave extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE_PLACE = "CREATE TABLE " + TABLE_PLACES + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_PLACE_ID + " TEXT unique" + ")";
+                + KEY_ID + " INTEGER PRIMARY KEY, " + KEY_PLACE_NAME + " TEXT, " + KEY_PLACE_ID + " TEXT unique" + ")";
         db.execSQL(CREATE_TABLE_PLACE);
 
         String CREATE_TABLE_HOTELS = "CREATE TABLE " + TABLE_HOTELS + "("
-                + KEY_ID2 + " INTEGER PRIMARY KEY," + KEY_HOTELS_ID + " TEXT unique" + ")";
+                + KEY_ID2 + " INTEGER PRIMARY KEY, " + KEY_RESTAURANTS_NAME + " TEXT, " + KEY_HOTELS_ID + " TEXT unique" + ")";
         db.execSQL(CREATE_TABLE_HOTELS);
 
         String CREATE_TABLE_RESTAURANT = "CREATE TABLE " + TABLE_RESTAURANTS + "("
-                + KEY_ID1 + " INTEGER PRIMARY KEY," + KEY_RESTAURANTS_ID + " TEXT unique" + ")";
+                + KEY_ID1 + " INTEGER PRIMARY KEY, " + KEY_HOTELS_NAME + " TEXT, " + KEY_RESTAURANTS_ID + " TEXT unique" + ")";
         db.execSQL(CREATE_TABLE_RESTAURANT);
 
     }
@@ -67,38 +67,15 @@ public class DatabaseSave extends SQLiteOpenHelper {
     }
 
     //methods for marking it as favourties...............................................................
-    public void addPlaces(String place_id) {
+    public void addPlaces(String place_id, String placeName) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_PLACE_ID, place_id);
+        values.put(KEY_PLACE_NAME, placeName);
         // Inserting Row
         db.insert(TABLE_PLACES, null, values);
         db.close(); // Closing database connection
-    }
-
-    public List<String> getAllPlaces() {
-        List<String> List = new ArrayList<String>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_PLACES;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        try {
-            // looping through all rows and adding to list
-            if (cursor.moveToFirst()) {
-                do {
-                    // Adding contact to list
-                    List.add(cursor.getString(1));
-                } while (cursor.moveToNext());
-            }
-        } finally {
-            if (cursor != null)
-                cursor.close();
-        }
-        // return contact list
-        return List;
     }
 
     public boolean getPlaces(String id) {
@@ -116,38 +93,15 @@ public class DatabaseSave extends SQLiteOpenHelper {
     }
 
     //methods for marking it as favourties...............................................................
-    public void addRestaurants(String restaurant_id) {
+    public void addRestaurants(String restaurant_id, String name) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_RESTAURANTS_ID, restaurant_id);
+        values.put(KEY_RESTAURANTS_NAME, name);
         // Inserting Row
         db.insert(TABLE_RESTAURANTS, null, values);
         db.close(); // Closing database connection
-    }
-
-    public List<String> getAllRes() {
-        List<String> List = new ArrayList<String>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_RESTAURANTS;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-                    // Adding contact to list
-                    List.add(cursor.getString(1));
-                } while (cursor.moveToNext());
-            }
-        } finally {
-            if (cursor != null)
-                cursor.close();
-        }
-        // return contact list
-        return List;
     }
 
     public boolean getRes(String id) {
@@ -165,38 +119,15 @@ public class DatabaseSave extends SQLiteOpenHelper {
     }
 
     //methods for marking it as favourties...............................................................
-    public void addHotels(String hotel_id) {
+    public void addHotels(String hotel_id, String hotelName) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_HOTELS_ID, hotel_id);
+        values.put(KEY_HOTELS_NAME, hotelName);
         // Inserting Row
         db.insert(TABLE_HOTELS, null, values);
         db.close(); // Closing database connection
-    }
-
-    public List<String> getAllHotels() {
-        List<String> List = new ArrayList<String>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_HOTELS;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-                    // Adding contact to list
-                    List.add(cursor.getString(1));
-                } while (cursor.moveToNext());
-            }
-        } finally {
-            if (cursor != null)
-                cursor.close();
-        }
-        // return contact list
-        return List;
     }
 
     public boolean gethotel(String id) {
@@ -217,8 +148,7 @@ public class DatabaseSave extends SQLiteOpenHelper {
         String selectQuery = "SELECT  * FROM " + TABLE_HOTELS;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        return cursor;
+        return db.rawQuery(selectQuery, null);
     }
 
     public void clearDatabase() {

@@ -216,10 +216,11 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                             saveImage.setImageResource(R.drawable.favourite_icon_red);
                             saveText.setText(R.string.saved);
                             saveText.setTextColor(Color.RED);
-                            db.addPlaces(place_id);
+                            db.addPlaces(place_id, place_name.getText().toString());
                         } else {
                             Utility.showSnackBar(getActivity(), getString(R.string.already_added));
                         }
+                        informDataUpdatedToWidgets();
                         break;
 
                     case Constants.TYPE_HOTELS:
@@ -228,10 +229,11 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                             saveImage.setImageResource(R.drawable.favourite_icon_red);
                             saveText.setText(R.string.saved);
                             saveText.setTextColor(Color.RED);
-                            db.addHotels(place_id);
+                            db.addHotels(place_id, place_name.getText().toString());
                         } else {
                             Utility.showSnackBar(getActivity(), getString(R.string.already_added));
                         }
+                        informDataUpdatedToWidgets();
                         break;
 
                     case Constants.TYPE_RESTAURANTS:
@@ -240,10 +242,11 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                             saveImage.setImageResource(R.drawable.favourite_icon_red);
                             saveText.setText(R.string.saved);
                             saveText.setTextColor(Color.RED);
-                            db.addRestaurants(place_id);
+                            db.addRestaurants(place_id, place_name.getText().toString());
                         } else {
                             Utility.showSnackBar(getActivity(), getString(R.string.already_added));
                         }
+                        informDataUpdatedToWidgets();
                         break;
 
                     case 4:
@@ -251,10 +254,11 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
                             saveImage.setImageResource(R.drawable.favourite_icon_red);
                             saveText.setText(R.string.saved);
                             saveText.setTextColor(Color.RED);
-                            db.addPlaces(place_id);
+                            db.addPlaces(place_id, place_name.getText().toString());
                         } else {
                             Utility.showSnackBar(getActivity(), getString(R.string.already_added));
                         }
+                        informDataUpdatedToWidgets();
                         break;
                 }
             }
@@ -264,7 +268,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
             case 1:
                 if (db.getPlaces(place_id)) {
                     saveImage.setImageResource(R.drawable.favourite_icon_red);
-                    saveText.setText("SAVED");
+                    saveText.setText(R.string.saved_caps);
                     saveText.setTextColor(Color.RED);
                 }
                 break;
@@ -272,7 +276,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
             case 2:
                 if (db.gethotel(place_id)) {
                     saveImage.setImageResource(R.drawable.favourite_icon_red);
-                    saveText.setText("SAVED");
+                    saveText.setText(R.string.saved_caps);
                     saveText.setTextColor(Color.RED);
                 }
                 break;
@@ -281,7 +285,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
 
                 if (db.getRes(place_id)) {
                     saveImage.setImageResource(R.drawable.favourite_icon_red);
-                    saveText.setText("SAVED");
+                    saveText.setText(R.string.saved_caps);
                     saveText.setTextColor(Color.RED);
                 }
                 break;
@@ -289,12 +293,18 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
             case 4:
                 if (db.getPlaces(place_id)) {
                     saveImage.setImageResource(R.drawable.favourite_icon_red);
-                    saveText.setText("SAVED");
+                    saveText.setText(R.string.saved_caps);
                     saveText.setTextColor(Color.RED);
                 }
                 break;
         }
 
+    }
+
+    private void informDataUpdatedToWidgets() {
+        Intent newIntent = new Intent(Utility.ACTION_DATA_UPDATE)
+                .setPackage(getApplicationContext().getPackageName());
+        getApplicationContext().sendBroadcast(newIntent);
     }
 
     @Override
@@ -362,7 +372,7 @@ public class PlaceDetailActivity extends BaseActivity implements OnMapReadyCallb
             } catch (Exception e) {
                 Log.i("Error", e.getMessage());
             }
-            rating.setText(rate + " user ratings");
+            rating.setText(getString(R.string.user_rating, rate + ""));
 
             if (list.has(TAG_OPENING_HOURS)) {
                 JSONObject opening_hours = list.getJSONObject(TAG_OPENING_HOURS);

@@ -637,6 +637,7 @@ public class Utility {
         String knownName = addresses.get(0).getFeatureName();
         return state;
     }
+    public static final String ACTION_DATA_UPDATE = "com.rahul.capstone.app.ACTION_DATA_UPDATED";
 
     /**
      * Method to return city, state name from lat long

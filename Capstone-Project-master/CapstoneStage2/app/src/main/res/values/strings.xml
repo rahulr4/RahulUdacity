@@ -94,4 +94,8 @@
     <string name="lbl_hiphen">-</string>
     <string name="saved">SAVED</string>
     <string name="already_added">Already Added</string>
+    <string name="saved_caps">SAVED</string>
+    <string name="user_rating"><xliff:g id="kilogram">%1$s</xliff:g> user ratings</string>
+    <string name="favourite_places">Favorite Places</string>
+    <string name="no_favourites_data">No Data</string>
 </resources>
